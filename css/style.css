@@ -14,9 +14,34 @@ font-size: 715%;
 font-weight:normal;
 word-spacing: 10px;
 margin-bottom: 0;
+margin-top: 0;
 position: relative;
 z-index: 1;
 }
+
+#name
+{
+	cursor:pointer;
+	transition: .3s;
+}
+/*#name:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: .33em;
+  left: 0;
+  background: #9CF5A6;
+  visibility: hidden;
+  border-radius: 5px;
+  transform: scaleX(0);
+  transition: .4s ease;
+}
+#name:hover:before,
+#name:focus:before {
+  visibility: visible;
+  transform: scaleX(1);
+}*/
 
 #compliment { font-family: 'L_Sans';
 font-size: 225%;
@@ -45,6 +70,8 @@ html
 }
 html, body { 
 	width: 100%; 
+	height: 100%;
+	position: absolute;
 	margin: 0;
 	color: #fff;
 }
@@ -53,22 +80,23 @@ html, body {
 {
 	/*text-shadow: 0 0 13px #3c3c3c;*/
 }
+#wrap-welcome{position:relative;}
 
-.wrap-center
+#wrap-content
 {
-	position: relative;
-	margin: 0 auto;
-	/*width: 30%;*/
-	min-width: 400px;
-	max-width: 800px;
+	position: absolute;
+	margin-left: calc(50% - 400px);
+	width: 800px;
+	top: 45%;
 
 	text-align: center;
+	will-change: top;
 }
 #wrap-input-name
 {
 	display: none;
 
-	background-color: rgba(150, 150, 150, .3);
+	background-color: rgba(255,255,255,.1);;
 	box-shadow: 0px 4px 15px 3px rgba(53, 53, 53, 0.3);
 	padding: 5%;
 	font-family: 'L_Sans';
@@ -92,12 +120,13 @@ input[type=text]
 	font-size: 38px;
 	color: white;
 	text-align: center;
+	outline: none;
 }
 
 .itr
 {
-	min-width: 100px;
-	max-width: 200px;
+	min-width: 75px;
+	max-width: 150px;
 	width: 15%;
 	height: 100%;
 	position: absolute;
@@ -111,6 +140,14 @@ input[type=text]
 	background-color: rgba(255,255,255,.1);
 }
 #nextPic { right: 0;}
-#prevPic { left: 0;})
+#prevPic { left: 0;}
 
 
+
+@-webkit-keyframes top10 {
+    100%  { top: 10%;}
+ }
+ @-webkit-keyframes top45 {
+ 0% { top: 10%;}
+    100%  { top: 45%;}
+ }

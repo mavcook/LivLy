@@ -57,9 +57,11 @@ $('document').ready(function(){
 	var nameInput =$('#input-name');
 
 	name.dblclick(function(){
-		
-		$('#wrap-input-name').show();
+
+		$('#wrap-input-name').fadeIn();
+		$('#wrap-content').css({'-webkit-animation': 'top10 1.2s ease forwards'});
 		nameInput.focus();
+		console.log("EFSDFA");
 	});
 	
 	nameInput.keypress(function(e){
@@ -67,7 +69,19 @@ $('document').ready(function(){
 		{
 			localStorage.setItem('name', nameInput.val());
 			$('#name').html(nameInput.val());
-			$('#wrap-input-name').hide();
+			nameInput.val('');
+			$('#wrap-content').css({'-webkit-animation': 'top45 1.2s ease forwards'});
+			
+
+			$('#wrap-input-name').fadeOut();
 		}
 	});
+
+	$('#wrap-input-name').focusout(function(){
+		nameInput.val('');
+			$('#wrap-content').css({'-webkit-animation': 'top45 1.2s ease forwards'});
+			
+
+			$('#wrap-input-name').fadeOut();
+		});
 });
