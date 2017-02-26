@@ -22,7 +22,7 @@ function getRandomInt(min, max) {
 }
 
 
-
+// TODO: wrap instead of goto 0
 function changePic(increment)
 {
 	var i = 0;
@@ -42,13 +42,28 @@ function changePic(increment)
 getFiles(bgDir, function(data){
 	BG_PICS = data; 
 	console.log(data);
-	changePic(0);
+	autoCycle();
 });
 
 getFiles(iconsDir, function(data){
 	ICONS = data;
 });
 
+// loads a random picture on a new day
+function autoCycle()
+{
+	var d = new Date(localStorage.date);
+	var now = new Date();
+
+	if (now > d && ( now.getDate() > d.getDate() && now.getMonth() >= d.getMonth()))
+	{
+		console.log("New day, new pic. Enjoy");
+		var i = getRandomInt(0, BG_PICS.length);
+		changePic(i);
+		localStorage.date = now;
+	}
+	else changePic(0);
+}
 
 $('document').ready(function(){
 	
@@ -57,6 +72,8 @@ $('document').ready(function(){
 		$('#name').html(localStorage.name);
 	$('#nextPic').click(function(){ changePic(1) });
 	$('#prevPic').click(function(){ changePic(-1) });
+	if (!localStorage.date)
+		localStorage.date = new Date();
 
 
 	var name = $('#name');

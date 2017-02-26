@@ -54,7 +54,8 @@
 		{ "category" : "motivational lovey", "text": "You are amazing at what you do and I’m so proud of what you’ve achieved." },
 		{ "category" : "funny lovey", "text": "I can't believe how lucky I am to be on your screen." },
 		{ "category" : "odd", "text": "You're so cool, I would make you dinner...if I had arms." },
-		{ "category" : "motivational", "text": "Your voice matters." },
-		{ "category" : "odd funny", "text": "When we aren't talking, I am hosting your fan club meetings." }
+		{ "category" : "motivational comfort", "text": "Your voice matters." },
+		{ "category" : "odd funny", "text": "When we aren't talking, I am hosting your fan club meetings." },
+		{ "category" : "comfort", "text": "I'm here with you." }
 	]
 }
