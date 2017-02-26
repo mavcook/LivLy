@@ -88,6 +88,9 @@ function autoCycle()
 
 
 $('document').ready(function(){
+
+	
+
 	
 	// load previous settings if exist
 	if (localStorage.name)
@@ -96,6 +99,18 @@ $('document').ready(function(){
 	$('#prevPic').click(function(){ changePic(-1) });
 	if (!localStorage.date)
 		localStorage.date = new Date();
+	// load compliments from file if not in cache
+	if (!localStorage.compliments)
+	{
+		loadJSON('compliments.json', loadComps);
+		console.log("loading compliments from file");
+	}
+	else
+	{
+		COMPLIMENTS = JSON.parse(localStorage.compliments);
+		changeCompliment();
+	}
+
 
 
 	var name = $('#name');
@@ -143,7 +158,7 @@ $('document').ready(function(){
 		toggleBookmarkDock();
 	});
 
-	loadJSON('compliments.json', loadComps);
+
 	loadJSON('bookmarks.json', createBookmarks);
 });
 
@@ -231,6 +246,7 @@ function getDomainName(url)
 function loadComps(json)
 {
 	COMPLIMENTS = json.compliments;
+	localStorage.compliments = JSON.stringify(COMPLIMENTS);
 	changeCompliment();
 }
 
