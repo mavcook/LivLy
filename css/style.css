@@ -87,7 +87,7 @@ html, body {
 	position: absolute;
 	margin-left: calc(50% - 400px);
 	width: 800px;
-	top: 45%;
+	top: 43%;
 
 	text-align: center;
 	will-change: top;
@@ -96,7 +96,7 @@ html, body {
 {
 	display: none;
 
-	background-color: rgba(255,255,255,.1);;
+	background-color: rgba(53,53,53,.2);
 	box-shadow: 0px 4px 15px 3px rgba(53, 53, 53, 0.3);
 	padding: 5%;
 	font-family: 'L_Sans';
@@ -149,5 +149,5 @@ input[type=text]
  }
  @-webkit-keyframes top45 {
  0% { top: 10%;}
-    100%  { top: 45%;}
+    100%  { top: 43%;}
  }

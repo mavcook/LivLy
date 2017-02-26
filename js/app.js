@@ -78,10 +78,42 @@ $('document').ready(function(){
 	});
 
 	$('#wrap-input-name').focusout(function(){
-		nameInput.val('');
-			$('#wrap-content').css({'-webkit-animation': 'top45 1.2s ease forwards'});
-			
 
-			$('#wrap-input-name').fadeOut();
-		});
+		nameInput.val('');
+		$('#wrap-content').css({'-webkit-animation': 'top45 1.2s ease forwards'});
+		$('#wrap-input-name').fadeOut();
+		
+	});
+
+	$('#compliment').dblclick(function(){
+		changeCompliment();
+	});
 });
+
+
+
+
+
+
+
+
+chrome.runtime.getPackageDirectoryEntry(function(root) {
+	root.getFile("test.json", {}, function(fileEntry) {
+		fileEntry.file(function(file) {
+			var reader = new FileReader();
+			reader.onloadend = function(e) {
+				var myFile = JSON.parse(this.result);
+				compliments = myFile.compliments;
+				console.log(myFile);
+			};
+			reader.readAsText(file);
+		});
+	});
+});
+var compliments;
+
+function changeCompliment()
+{
+	var idx = getRandomInt(0, compliments.length - 1);
+	$('#compliment').html(compliments[idx].text);
+}
