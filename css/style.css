@@ -151,6 +151,7 @@ input[type=text]
 	top: 68%;
 	position: relative;
 	margin: 0 auto;
+	will-change: top;
 }
 #wrap-bookmarks a{
 	text-decoration: none;
@@ -178,9 +179,13 @@ input[type=text]
 }
 .bookmark h1
 {
-
-	font-size: 300%;
+	font-size: 400%;
 	margin: 0;
+}
+.bookmark img
+{
+	width: 50%;
+	padding-top: 25%;
 }
 
 
@@ -192,11 +197,10 @@ input[type=text]
 	left: calc(50% - (90px / 2));
 	padding: 10px 20px;
 	cursor: pointer;
-	
 }
 
-svg line {transition: .3s;}
-#bookmark_launcher:hover > svg line
+svg polyline {transition: .3s;}
+#bookmark_launcher:hover > svg polyline
 {
 	stroke: rgb(255,255,255);
 }

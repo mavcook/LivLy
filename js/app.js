@@ -87,7 +87,6 @@ $('document').ready(function(){
 		$('#wrap-input-name').fadeIn();
 		$('#wrap-content').css({'-webkit-animation': 'top10 1.2s ease forwards'});
 		nameInput.focus();
-		console.log("EFSDFA");
 	});
 	
 	nameInput.keypress(function(e){
@@ -123,7 +122,7 @@ $('document').ready(function(){
 		}
 		else
 		{
-			bookmarks.css({'-webkit-animation': 'top90_to_68 1.2s ease forwards'});
+			bookmarks.css({'-webkit-animation': 'top90_to_68 .7s ease forwards'});
 			/* TODO: allow overflow so multiple rows of bookmarks can scroll */
 			bookmarks.fadeIn();
 		}

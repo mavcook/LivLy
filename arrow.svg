@@ -1,6 +1,8 @@
-<svg version="1.1" x="0px" y="0px" width="74.62px" height="24.498px" viewBox="0 0 74.62 24.498" enable-background="new 0 0 74.62 24.498" xml:space="preserve">
-			<g>
-				<line fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-miterlimit="10" x1="4.619" y1="21.836" x2="37.352" y2="2.524"/>
-				<line fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-miterlimit="10" x1="70.002" y1="21.975" x2="37.352" y2="2.524"/>
-			</g>
-		</svg>
+<svg version="1.1" x="0px" y="0px"
+	 width="74.62px" height="24.498px" viewBox="0 0 74.62 24.498" enable-background="new 0 0 74.62 24.498" xml:space="preserve">
+<g>
+	
+		<polyline fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		70.002,21.975 37.352,2.524 4.619,21.836 	"/>
+</g>
+</svg>

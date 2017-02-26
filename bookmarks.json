@@ -1,8 +1,8 @@
 {
 	"bookmarks":
 	{
-		"1": { "src": "https://www.nytimes.com/", "icon": "", "name": "The New York Times", "short_name": "NY Times"},
-		"2": { "src": "https://www.facebook.com/", "icon": "", "name": "Facebook", "short_name": "Facebook"},
-		"3": { "src": "https://www.nytimes.com/", "icon": "", "name": "The New York Times", "short_name": "NY Times"}
+		"1": { "src": "https://www.nytimes.com/", "icon": "icons/nytimes.com.svg", "name": "The New York Times", "short_name": "NY Times"},
+		"2": { "src": "https://www.facebook.com/", "icon": "icons/facebook.com.svg", "name": "Facebook", "short_name": "Facebook"},
+		"3": { "src": "http://www.refinery29.com/", "icon": "icons/refinery29.com.svg", "name": "Refinery 29", "short_name": "R29"}
 	}
 }
