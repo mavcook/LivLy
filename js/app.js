@@ -1,5 +1,6 @@
 var BG_PICS = [];
 var ICONS = [];
+var COMPLIMENTS;
 var iconsDir = "icons";
 var bgDir = "bg";
 
@@ -48,6 +49,7 @@ getFiles(iconsDir, function(data){
 	ICONS = data;
 });
 
+
 $('document').ready(function(){
 	
 	// load previous settings if exist
@@ -57,12 +59,11 @@ $('document').ready(function(){
 	$('#prevPic').click(function(){ changePic(-1) });
 
 
-	console.log(BG_PICS);
-
 	var name = $('#name');
 	var nameInputDiv = $('#wrap-input-name');
 	var nameInput =$('#input-name');
 	var bookmarks = $('#wrap-bookmarks');
+
 
 	name.dblclick(function(){
 
@@ -105,12 +106,13 @@ $('document').ready(function(){
 		}
 		else
 		{
-			bookmarks.css({'-webkit-animation': 'top90_to_65 1.2s ease forwards'});
+			bookmarks.css({'-webkit-animation': 'top90_to_68 1.2s ease forwards'});
 			/* TODO: allow overflow so multiple rows of bookmarks can scroll */
 			bookmarks.fadeIn();
 		}
 	});
 
+	loadJSON('compliments.json', loadComps);
 	loadJSON('bookmarks.json', createBookmarks);
 });
 
@@ -156,7 +158,6 @@ function getIcon(url)
 	// TODO: look into getting JSON listing of a directory
 	for (var i = 0; i < ICONS.length; i++)
 	{
-		console.log("ICONS ", ICONS[i]);
 		if (ICONS[i].indexOf(domain) !== -1)
 			return ICONS[i];
 	}
@@ -177,10 +178,11 @@ function getDomainName(url)
 
 function loadComps(json)
 {
-	compliments = json.compliments;
+	COMPLIMENTS = json.compliments;
+	changeCompliment();
 }
 
-loadJSON('compliments.json', loadComps);
+
 
 
 function loadJSON(filename, callback)
@@ -198,10 +200,10 @@ function loadJSON(filename, callback)
 		});
 	});
 }
-var compliments;
+
 
 function changeCompliment()
 {
-	var idx = getRandomInt(0, compliments.length - 1);
-	$('#compliment').html(compliments[idx].text);
+	var idx = getRandomInt(0, COMPLIMENTS.length - 1);
+	$('#compliment').html(COMPLIMENTS[idx].text);
 }

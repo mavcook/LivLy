@@ -1,1 +1,1 @@
-Min resolution: 530x600
+Min resolution: 800x680
