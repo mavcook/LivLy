@@ -122,7 +122,7 @@ $('document').ready(function(){
 	var nameInputDiv = $('#wrap-input-name');
 	var nameInput =$('#input-name');
 
-	content.show();
+	content.fadeIn(1700);
 
 	name.dblclick(function(){
 
