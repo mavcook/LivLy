@@ -1,0 +1,1 @@
+Min resolution: 530x600

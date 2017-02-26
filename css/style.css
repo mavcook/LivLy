@@ -74,6 +74,7 @@ html, body {
 	position: absolute;
 	margin: 0;
 	color: #fff;
+	overflow:hidden; /* TODO: allow overflow so multiple rows of bookmarks can scroll */
 }
 
 .pop-text h1, .pop-text h2, .pop-text h3, .pop-text p, .pop-text span
@@ -142,12 +143,61 @@ input[type=text]
 #nextPic { right: 0;}
 #prevPic { left: 0;}
 
+#wrap-bookmarks{
+	display:none;
+	max-width: 688px; /* 172 * 4 divs */
+	top: 65%;
+	position: relative;
+	margin: 0 auto;
+}
 
+.bookmark
+{
+	width: 130px;
+	height: 130px;
+	border: 1px solid #fff;
+	padding: 10px;
+	margin: 10px;
+	display: inline-block;
+	background-color: rgba(255,255,255,0);
+	transition: .3s;
+}
+.bookmark:hover{
+	background-color: rgba(255,255,255,.1);
+}
+
+#bookmark_launcher
+{
+	position: fixed;
+	bottom: 0;
+	width: 50px;
+	left: calc(50% - (90px / 2));
+	padding: 10px 20px;
+	cursor: pointer;
+	
+}
+
+svg line {transition: .3s;}
+#bookmark_launcher:hover > svg line
+{
+	stroke: rgb(255,255,255);
+}
+.shade.small 
+{
+	filter: blur(20px);
+	left: 0;
+	z-index: -1;
+}
 
 @-webkit-keyframes top10 {
-    100%  { top: 10%;}
- }
- @-webkit-keyframes top45 {
- 0% { top: 10%;}
-    100%  { top: 43%;}
- }
+	100%  { top: 10%;}
+}
+@-webkit-keyframes top10_to_45 {
+	0% { top: 10%;}
+	100%  { top: 43%;}
+}
+@-webkit-keyframes top90_to_65 {
+	0% { top: 90%;}
+	100%  { top: 65%;}
+}
+

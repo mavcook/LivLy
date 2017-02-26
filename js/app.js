@@ -55,6 +55,7 @@ $('document').ready(function(){
 	var name = $('#name');
 	var nameInputDiv = $('#wrap-input-name');
 	var nameInput =$('#input-name');
+	var bookmarks = $('#wrap-bookmarks');
 
 	name.dblclick(function(){
 
@@ -70,7 +71,7 @@ $('document').ready(function(){
 			localStorage.setItem('name', nameInput.val());
 			$('#name').html(nameInput.val());
 			nameInput.val('');
-			$('#wrap-content').css({'-webkit-animation': 'top45 1.2s ease forwards'});
+			$('#wrap-content').css({'-webkit-animation': 'top10_to_45 1.2s ease forwards'});
 			
 
 			$('#wrap-input-name').fadeOut();
@@ -80,7 +81,7 @@ $('document').ready(function(){
 	$('#wrap-input-name').focusout(function(){
 
 		nameInput.val('');
-		$('#wrap-content').css({'-webkit-animation': 'top45 1.2s ease forwards'});
+		$('#wrap-content').css({'-webkit-animation': 'top10_to_45 1.2s ease forwards'});
 		$('#wrap-input-name').fadeOut();
 		
 	});
@@ -88,28 +89,72 @@ $('document').ready(function(){
 	$('#compliment').dblclick(function(){
 		changeCompliment();
 	});
+
+
+	$('#bookmark_launcher').click(function(){
+		if (bookmarks.is(":visible"))
+		{
+			bookmarks.fadeOut();
+		}
+		else
+		{
+			bookmarks.css({'-webkit-animation': 'top90_to_65 1.2s ease forwards'});
+			/* TODO: allow overflow so multiple rows of bookmarks can scroll */
+			bookmarks.fadeIn();
+		}
+	});
+
+	loadJSON('bookmarks.json', createBookmarks);
 });
 
 
 
+var BOOKMARK_WIDTH = 172; //TODO: make this dynamic
+function createBookmarks(json)
+{
+	console.log("Bookmarks JSON", json);
+	var bm = json.bookmarks;
+	var wrap_bookmarks = $('#wrap-bookmarks');
+	
+	var numBookmarks = 0;
+	for (var key in bm)
+	{
+		var b = bm[key];
+		var link = $('<a>', {href: b.src});
+		var bDiv = $('<div>', {class: "bookmark"});
+		var icon = $('<img>', {src: b.icon});
+
+		bDiv.append(icon);
+		link.append(bDiv);
+		wrap_bookmarks.append(link);
+		numBookmarks++;
+	}
+	wrap_bookmarks.css({width: numBookmarks * BOOKMARK_WIDTH + 'px'}); 
+}
+
+function loadComps(json)
+{
+	compliments = json.compliments;
+}
+
+loadJSON('compliments.json', loadComps);
 
 
-
-
-
-chrome.runtime.getPackageDirectoryEntry(function(root) {
-	root.getFile("test.json", {}, function(fileEntry) {
-		fileEntry.file(function(file) {
-			var reader = new FileReader();
-			reader.onloadend = function(e) {
-				var myFile = JSON.parse(this.result);
-				compliments = myFile.compliments;
-				console.log(myFile);
-			};
-			reader.readAsText(file);
+function loadJSON(filename, callback)
+{
+	chrome.runtime.getPackageDirectoryEntry(function(root) {
+		root.getFile(filename, {}, function(fileEntry) {
+			fileEntry.file(function(file) {
+				var reader = new FileReader();
+				reader.onloadend = function(e) {
+					var myFile = JSON.parse(this.result);
+					callback(myFile);
+				};
+				reader.readAsText(file);
+			});
 		});
 	});
-});
+}
 var compliments;
 
 function changeCompliment()
