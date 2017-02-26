@@ -1,4 +1,7 @@
 var BG_PICS = [];
+var ICONS = [];
+var iconsDir = "icons";
+var bgDir = "bg";
 
 function getFiles(directory, callback) {
   chrome.runtime.getPackageDirectoryEntry(function(root) {
@@ -35,10 +38,14 @@ function changePic(increment)
 	$('html').css('background-image', 'url(bg/' + BG_PICS[i] + ')');
 }
 
-getFiles('bg', function(data){
+getFiles(bgDir, function(data){
 	BG_PICS = data; 
 	console.log(data);
 	changePic(0);
+});
+
+getFiles(iconsDir, function(data){
+	ICONS = data;
 });
 
 $('document').ready(function(){
@@ -124,6 +131,15 @@ function createBookmarks(json)
 		var bDiv = $('<div>', {class: "bookmark"});
 		var icon = $('<img>', {src: b.icon});
 
+		// look for or create icon if non specified
+		if (b.icon === "")
+		{
+			var standardIcon = getIcon(b.src);
+			if (!standardIcon)
+				icon = $('<h1>').html(getDomainName(b.src)[0].toUpperCase());
+			else icon.attr({src: iconsDir + '/' + standardIcon})
+		}
+
 		bDiv.append(icon);
 		link.append(bDiv);
 		wrap_bookmarks.append(link);
@@ -131,6 +147,33 @@ function createBookmarks(json)
 	}
 	wrap_bookmarks.css({width: numBookmarks * BOOKMARK_WIDTH + 'px'}); 
 }
+
+// searches local icons folder for an icon that matches a given url
+function getIcon(url)
+{
+	var domain = getDomainName(url);
+
+	// TODO: look into getting JSON listing of a directory
+	for (var i = 0; i < ICONS.length; i++)
+	{
+		console.log("ICONS ", ICONS[i]);
+		if (ICONS[i].indexOf(domain) !== -1)
+			return ICONS[i];
+	}
+	return null;
+}
+
+// excludes WWW.
+function getDomainName(url)
+{
+	if(url.search(/^https?\:\/\//) != -1)
+		url = url.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i, "");
+	else
+		url = url.match(/^(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i, "");
+	return url[1];
+}
+
+
 
 function loadComps(json)
 {

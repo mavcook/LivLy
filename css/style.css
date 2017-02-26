@@ -43,12 +43,13 @@ z-index: 1;
   transform: scaleX(1);
 }*/
 
-#compliment { font-family: 'L_Sans';
-font-size: 225%;
-word-spacing: 4px;
-margin-top: 0;
-position: relative;
-z-index: 1;
+#compliment 
+{
+	font-size: 225%;
+	word-spacing: 4px;
+	margin-top: 0;
+	position: relative;
+	z-index: 1;
 }
 
 .shade{
@@ -75,6 +76,7 @@ html, body {
 	margin: 0;
 	color: #fff;
 	overflow:hidden; /* TODO: allow overflow so multiple rows of bookmarks can scroll */
+	font-family: 'L_Sans';
 }
 
 .pop-text h1, .pop-text h2, .pop-text h3, .pop-text p, .pop-text span
@@ -150,21 +152,37 @@ input[type=text]
 	position: relative;
 	margin: 0 auto;
 }
+#wrap-bookmarks a{
+	text-decoration: none;
+	color: inherit;
+}
 
 .bookmark
 {
 	width: 130px;
 	height: 130px;
+	
 	border: 1px solid #fff;
 	padding: 10px;
 	margin: 10px;
 	display: inline-block;
 	background-color: rgba(255,255,255,0);
 	transition: .3s;
+
+	text-align: center;
+	line-height: 130px; /* center letter vertically */
+	vertical-align: top;
 }
 .bookmark:hover{
 	background-color: rgba(255,255,255,.1);
 }
+.bookmark h1
+{
+
+	font-size: 300%;
+	margin: 0;
+}
+
 
 #bookmark_launcher
 {
