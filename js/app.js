@@ -3,6 +3,7 @@ var ICONS = [];
 var COMPLIMENTS;
 var iconsDir = "icons";
 var bgDir = "bg";
+var BG_RES = [1366, 1920, 2560, 3840];
 
 function getFiles(directory, callback) {
   chrome.runtime.getPackageDirectoryEntry(function(root) {
@@ -36,14 +37,27 @@ function changePic(increment)
 	else i = 0;
 
 	localStorage.picIdx =  i;
-	$('html').css('background-image', 'url(bg/' + BG_PICS[i] + ')');
+	$('html').css('background-image', 'url(' + bgDir + '/' + BG_PICS[i] + ')');
 }
 
-getFiles(bgDir, function(data){
-	BG_PICS = data; 
-	console.log(data);
-	autoCycle();
-});
+
+// figure out which folder (res) pics to use
+var screenWidth = window.screen.width;
+for (var i = 0; i < BG_RES.length; ++i)
+{
+	if (BG_RES[i] >= screenWidth)
+	{
+		bgDir += '/' + BG_RES[i];
+		getFiles(bgDir, function(data){
+			BG_PICS = data; 
+			console.log(data);
+			autoCycle();
+		});
+		break;
+	}
+}
+
+
 
 getFiles(iconsDir, function(data){
 	ICONS = data;
@@ -64,6 +78,10 @@ function autoCycle()
 	}
 	else changePic(0);
 }
+
+
+
+
 
 $('document').ready(function(){
 	
@@ -92,8 +110,11 @@ $('document').ready(function(){
 	nameInput.keypress(function(e){
 		if (e.which === 13)
 		{
-			localStorage.setItem('name', nameInput.val());
-			$('#name').html(nameInput.val());
+			var input = nameInput.val();
+			if (!input.replace(/\s/g, '').length) //just whitespace
+				return;
+			localStorage.setItem('name', input);
+			$('#name').html(input);
 			nameInput.val('');
 			$('#wrap-content').css({'-webkit-animation': 'top10_to_45 1.2s ease forwards'});
 			

@@ -68,6 +68,8 @@ html
 	background: no-repeat center center fixed;
 	-webkit-background-size: cover;
 	background-size: cover;
+	user-select: none;
+	cursor: default;
 }
 html, body { 
 	width: 100%; 
