@@ -1,0 +1,24 @@
+{
+   // "background": {
+   //    "persistent": false
+   //   // "scripts": [ "momentum.js" ]
+   // },
+   "browser_action": {
+      "default_title": "LivUp"
+   },
+   "chrome_url_overrides": {
+      "newtab": "index.html"
+   },
+   "description": "Replace new tab page with a personal dashboard featuring todo, weather, and inspiration.",
+   // "icons": {
+   //   // "128": "icon-128.png",
+   //   // "16": "icon-16.png"
+   // },
+   "manifest_version": 2,
+   "name": "LivUp",
+   "offline_enabled": true,
+   "permissions": [ "unlimitedStorage" ],
+   "short_name": "LivUp",
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.92.2"
+}

@@ -1,0 +1,116 @@
+@font-face
+{
+	font-family: 'L_Cursive';
+	src: url('/fonts/HaloHandletter.woff') format('woff');
+}
+@font-face
+{
+	font-family: 'L_Sans';
+	src: url('/fonts/Montserrat-Regular.woff') format('woff');
+}
+
+#greeting { font-family: 'L_Cursive';
+font-size: 715%;
+font-weight:normal;
+word-spacing: 10px;
+margin-bottom: 0;
+position: relative;
+z-index: 1;
+}
+
+#compliment { font-family: 'L_Sans';
+font-size: 225%;
+word-spacing: 4px;
+margin-top: 0;
+position: relative;
+z-index: 1;
+}
+
+.shade{
+	height: 110%;
+	background-color: rgba(53, 53, 53, 0.3);
+	width: 100%;
+	position: absolute;
+	top: 0;
+	z-index: 0;
+	filter: blur(70px);
+	z-index: 0;
+}
+
+html
+{
+	background: no-repeat center center fixed;
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+html, body { 
+	width: 100%; 
+	margin: 0;
+	color: #fff;
+}
+
+.pop-text h1, .pop-text h2, .pop-text h3, .pop-text p, .pop-text span
+{
+	/*text-shadow: 0 0 13px #3c3c3c;*/
+}
+
+.wrap-center
+{
+	position: relative;
+	margin: 0 auto;
+	/*width: 30%;*/
+	min-width: 400px;
+	max-width: 800px;
+
+	text-align: center;
+}
+#wrap-input-name
+{
+	display: none;
+
+	background-color: rgba(150, 150, 150, .3);
+	box-shadow: 0px 4px 15px 3px rgba(53, 53, 53, 0.3);
+	padding: 5%;
+	font-family: 'L_Sans';
+}
+
+#wrap-input-name h2 { 
+	margin-top: 0;
+	font-size: 200%; 
+	font-family: 'L_Sans'; 
+	font-style: italic;
+	text-shadow: 0 0 6px rgb(152, 152, 152);
+}
+
+input[type=text]
+{
+	background-color: rgba(53, 53, 53, 0.0);
+	border: none;
+	border-bottom: 2px solid rgba(255,255,255,.8);
+	/* padding: 20px; */
+	width: 100%;
+	font-size: 38px;
+	color: white;
+	text-align: center;
+}
+
+.itr
+{
+	min-width: 100px;
+	max-width: 200px;
+	width: 15%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	cursor: pointer;
+	background-color: rgba(255,255,255,0);
+	transition: .3s;
+}
+.itr:hover
+{
+	background-color: rgba(255,255,255,.1);
+}
+#nextPic { right: 0;}
+#prevPic { left: 0;})
+
+
