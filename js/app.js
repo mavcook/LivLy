@@ -4,6 +4,10 @@ var COMPLIMENTS;
 var iconsDir = "icons";
 var bgDir = "bg";
 var BG_RES = [1366, 1920, 2560, 3840];
+var KEYS = {
+	space: 32,
+	enter: 13
+};
 
 function getFiles(directory, callback) {
   chrome.runtime.getPackageDirectoryEntry(function(root) {
@@ -97,7 +101,6 @@ $('document').ready(function(){
 	var name = $('#name');
 	var nameInputDiv = $('#wrap-input-name');
 	var nameInput =$('#input-name');
-	var bookmarks = $('#wrap-bookmarks');
 
 
 	name.dblclick(function(){
@@ -108,7 +111,7 @@ $('document').ready(function(){
 	});
 	
 	nameInput.keypress(function(e){
-		if (e.which === 13)
+		if (e.which === KEYS.enter)
 		{
 			var input = nameInput.val();
 			if (!input.replace(/\s/g, '').length) //just whitespace
@@ -137,23 +140,35 @@ $('document').ready(function(){
 
 
 	$('#bookmark_launcher').click(function(){
-		if (bookmarks.is(":visible"))
-		{
-			bookmarks.fadeOut();
-		}
-		else
-		{
-			bookmarks.css({'-webkit-animation': 'top90_to_68 .7s ease forwards'});
-			/* TODO: allow overflow so multiple rows of bookmarks can scroll */
-			bookmarks.fadeIn();
-		}
+		toggleBookmarkDock();
 	});
 
 	loadJSON('compliments.json', loadComps);
 	loadJSON('bookmarks.json', createBookmarks);
 });
 
+document.onkeypress = function (e) {
+	e = e || window.event;
+	if (e.keyCode === KEYS.space && $('#wrap-input-name').is(":visible") === false)
+		toggleBookmarkDock();
+	// TODO: switch and shortcuts 1->goto first bookmark
+};
 
+// shows or hides the bookmark dock
+function toggleBookmarkDock()
+{
+	var bookmarks = $('#wrap-bookmarks');
+	if (bookmarks.is(":visible"))
+	{
+		bookmarks.fadeOut();
+	}
+	else
+	{
+		bookmarks.css({'-webkit-animation': 'top90_to_68 .7s ease forwards'});
+		/* TODO: allow overflow so multiple rows of bookmarks can scroll */
+		bookmarks.fadeIn();
+	}
+}
 
 var BOOKMARK_WIDTH = 172; //TODO: make this dynamic
 function createBookmarks(json)
