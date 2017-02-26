@@ -89,6 +89,7 @@ html, body {
 
 #wrap-content
 {
+	display: none;
 	position: absolute;
 	margin-left: calc(50% - 400px);
 	width: 800px;

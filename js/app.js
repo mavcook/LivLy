@@ -44,22 +44,23 @@ function changePic(increment)
 	$('html').css('background-image', 'url(' + bgDir + '/' + BG_PICS[i] + ')');
 }
 
-
 // figure out which folder (res) pics to use
-var screenWidth = window.screen.width;
-for (var i = 0; i < BG_RES.length; ++i)
-{
-	if (BG_RES[i] >= screenWidth)
-	{
-		bgDir += '/' + BG_RES[i];
-		getFiles(bgDir, function(data){
-			BG_PICS = data; 
-			console.log(data);
-			autoCycle();
-		});
-		break;
-	}
-}
+		var screenWidth = window.screen.width;
+		for (var i = 0; i < BG_RES.length; ++i)
+		{
+			if (BG_RES[i] >= screenWidth)
+			{
+				bgDir += '/' + BG_RES[i];
+				getFiles(bgDir, function(data){
+					BG_PICS = data;
+					localStorage.BG_PICS = JSON.stringify(BG_PICS);
+					console.log(data);
+					autoCycle();
+				});
+				break;
+			}
+		}
+
 
 
 
@@ -84,22 +85,13 @@ function autoCycle()
 }
 
 
-
-
-
-$('document').ready(function(){
-
-	
-
-	
-	// load previous settings if exist
-	if (localStorage.name)
-		$('#name').html(localStorage.name);
-	$('#nextPic').click(function(){ changePic(1) });
-	$('#prevPic').click(function(){ changePic(-1) });
+// loads previous settings if exist
+function loadLocalStorage()
+{
 	if (!localStorage.date)
 		localStorage.date = new Date();
-	// load compliments from file if not in cache
+
+	// compliments
 	if (!localStorage.compliments)
 	{
 		loadJSON('compliments.json', loadComps);
@@ -111,17 +103,31 @@ $('document').ready(function(){
 		changeCompliment();
 	}
 
+	if (localStorage.name)
+		$('#name').html(localStorage.name);
+	// sotring bg pics was worse performance in here
+}
 
 
+$('document').ready(function(){
+
+	loadLocalStorage();
+
+
+	$('#nextPic').click(function(){ changePic(1) });
+	$('#prevPic').click(function(){ changePic(-1) });
+	
+	var content = $('#wrap-content');
 	var name = $('#name');
 	var nameInputDiv = $('#wrap-input-name');
 	var nameInput =$('#input-name');
 
+	content.show();
 
 	name.dblclick(function(){
 
-		$('#wrap-input-name').fadeIn();
-		$('#wrap-content').css({'-webkit-animation': 'top10 1.2s ease forwards'});
+		nameInputDiv.fadeIn();
+		content.css({'-webkit-animation': 'top10 1.2s ease forwards'});
 		nameInput.focus();
 	});
 	
@@ -134,18 +140,17 @@ $('document').ready(function(){
 			localStorage.setItem('name', input);
 			$('#name').html(input);
 			nameInput.val('');
-			$('#wrap-content').css({'-webkit-animation': 'top10_to_45 1.2s ease forwards'});
+			content.css({'-webkit-animation': 'top10_to_45 1.2s ease forwards'});
 			
-
-			$('#wrap-input-name').fadeOut();
+			nameInputDiv.fadeOut();
 		}
 	});
 
 	$('#wrap-input-name').focusout(function(){
 
 		nameInput.val('');
-		$('#wrap-content').css({'-webkit-animation': 'top10_to_45 1.2s ease forwards'});
-		$('#wrap-input-name').fadeOut();
+		content.css({'-webkit-animation': 'top10_to_45 1.2s ease forwards'});
+		nameInputDiv.fadeOut();
 		
 	});
 
