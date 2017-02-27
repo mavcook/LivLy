@@ -41,7 +41,10 @@ function changePic(increment)
 	else i = 0;
 
 	localStorage.picIdx =  i;
-	$('html').css('background-image', 'url(' + bgDir + '/' + BG_PICS[i] + ')');
+	var bg = $('#bg');
+	bg.css('background-image', 'url(' + bgDir + '/' + BG_PICS[i] + ')');
+	if (bg.is(':visible') === false)
+		bg.fadeIn(600);
 }
 
 // figure out which folder (res) pics to use

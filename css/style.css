@@ -9,15 +9,6 @@
 	src: url('/fonts/Montserrat-Regular.woff') format('woff');
 }
 
-html
-{
-	background: no-repeat center center fixed;
-	-webkit-background-size: cover;
-	background-size: cover;
-	user-select: none;
-	cursor: default;
-	transition: background .5s linear;
-}
 html, body { 
 	width: 100%; 
 	height: 100%;
@@ -26,6 +17,21 @@ html, body {
 	color: #fff;
 	overflow:hidden; /* TODO: allow overflow so multiple rows of bookmarks can scroll */
 	font-family: 'L_Sans';
+	user-select: none;
+	cursor: default;
+}
+
+
+#bg
+{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	display: none;
+	background: no-repeat center center fixed;
+	-webkit-background-size: cover;
+	background-size: cover;
+	transition: background .5s linear;
 }
 
 #greeting { 
