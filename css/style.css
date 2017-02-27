@@ -82,6 +82,7 @@ html, body {
 	z-index: 0;
 	filter: blur(70px);
 	z-index: 0;
+	display:none;
 }
 
 
@@ -89,7 +90,7 @@ html, body {
 
 #wrap-content
 {
-	display: none;
+	display:none;
 	position: absolute;
 	margin-left: calc(50% - 400px);
 	width: 800px;
@@ -97,6 +98,7 @@ html, body {
 
 	text-align: center;
 	will-change: top;
+	/*opacity: 0;*/
 }
 #wrap-input-name
 {
@@ -224,4 +226,9 @@ svg polyline {transition: .3s;}
 @-webkit-keyframes top90_to_68 {
 	0% { top: 90%;}
 	100%  { top: 68%;}
+}
+
+@-webkit-keyframes fadeIn {
+	0% { opacity: 0;}
+	100%  { opacitiy: 1;}
 }

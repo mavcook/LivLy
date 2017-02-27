@@ -45,21 +45,21 @@ function changePic(increment)
 }
 
 // figure out which folder (res) pics to use
-		var screenWidth = window.screen.width;
-		for (var i = 0; i < BG_RES.length; ++i)
-		{
-			if (BG_RES[i] >= screenWidth)
-			{
-				bgDir += '/' + BG_RES[i];
-				getFiles(bgDir, function(data){
-					BG_PICS = data;
-					localStorage.BG_PICS = JSON.stringify(BG_PICS);
-					console.log(data);
-					autoCycle();
-				});
-				break;
-			}
-		}
+var screenWidth = window.screen.width;
+for (var i = 0; i < BG_RES.length; ++i)
+{
+	if (BG_RES[i] >= screenWidth)
+	{
+		bgDir += '/' + BG_RES[i];
+		getFiles(bgDir, function(data){
+			BG_PICS = data;
+			localStorage.BG_PICS = JSON.stringify(BG_PICS);
+			console.log(data);
+			autoCycle();
+		});
+		break;
+	}
+}
 
 
 
@@ -122,7 +122,7 @@ $('document').ready(function(){
 	var nameInputDiv = $('#wrap-input-name');
 	var nameInput =$('#input-name');
 
-	content.fadeIn(1700);
+	content.fadeIn(1700, function(){$('.shade').fadeIn(1000)});
 
 	name.dblclick(function(){
 
