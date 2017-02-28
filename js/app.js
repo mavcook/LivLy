@@ -26,19 +26,19 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// Fix for JS not doing mod properly on negatives
+Number.prototype.mod = function(n) {
+	return ((this%n)+n)%n;
+}
 
-// TODO: wrap instead of goto 0
+// TODO: convert to using pic keys so pictures can be moved/deleted
 function changePic(increment)
 {
 	var i = 0;
-	if (localStorage.picIdx)// convert to keys so pictures can be moved/deleted
+	if (localStorage.picIdx)
 		i = parseInt(localStorage.picIdx);
 
-	if (i + increment < BG_PICS.length && i + increment > 0)
-		i += increment;
-	else if (i + increment < 0)
-		i = BG_PICS.length - 1;
-	else i = 0;
+	i = (i + increment).mod(BG_PICS.length);
 
 	localStorage.picIdx =  i;
 	var bg = $('#bg');
