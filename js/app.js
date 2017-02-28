@@ -42,25 +42,36 @@ function changePic(increment)
 
 	localStorage.picIdx =  i;
 	var bg = $('#bg');
-	bg.css('background-image', 'url(' + bgDir + '/' + BG_PICS[i] + ')');
+	bg.css('background-image', 'url(' + BG_PICS[i] + ')');
 	if (bg.is(':visible') === false)
 		bg.fadeIn(600);
 }
 
 // figure out which folder (res) pics to use
-var screenWidth = window.screen.width;
-for (var i = 0; i < BG_RES.length; ++i)
+if (localStorage.BG_PICS && !localStorage.refreshPics)
+{	BG_PICS = JSON.parse(localStorage.BG_PICS);
+	console.log("Load from local storage", BG_PICS);
+	autoCycle();
+}
+else
 {
-	if (BG_RES[i] >= screenWidth)
+	var screenWidth = window.screen.width;
+	for (var i = 0; i < BG_RES.length; ++i)
 	{
-		bgDir += '/' + BG_RES[i];
-		getFiles(bgDir, function(data){
-			BG_PICS = data;
-			localStorage.BG_PICS = JSON.stringify(BG_PICS);
-			console.log(data);
-			autoCycle();
-		});
-		break;
+		if (BG_RES[i] >= screenWidth)
+		{
+			bgDir += '/' + BG_RES[i];
+			getFiles(bgDir, function(data){
+				// create full path
+				for (var j = 0; j < data.length; ++j)
+					data[j] = bgDir + '/' + data[j];
+				BG_PICS = data;
+				localStorage.BG_PICS = JSON.stringify(BG_PICS);
+				console.log("Load from dir", data);
+				autoCycle();
+			});
+			break;
+		}
 	}
 }
 
@@ -108,7 +119,6 @@ function loadLocalStorage()
 
 	if (localStorage.name)
 		$('#name').html(localStorage.name);
-	// sotring bg pics was worse performance in here
 }
 
 
@@ -223,6 +233,7 @@ function createBookmarks(json)
 		numBookmarks++;
 	}
 	wrap_bookmarks.css({width: numBookmarks * BOOKMARK_WIDTH + 'px'}); 
+	$('#bookmark_launcher').fadeIn(500);
 }
 
 // searches local icons folder for an icon that matches a given url
