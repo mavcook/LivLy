@@ -68,6 +68,7 @@ else
 				BG_PICS = data;
 				localStorage.BG_PICS = JSON.stringify(BG_PICS);
 				console.log("Load from dir", data);
+				localStorage.removeItem('refreshPics');
 				autoCycle();
 			});
 			break;
@@ -233,7 +234,7 @@ function createBookmarks(json)
 		numBookmarks++;
 	}
 	wrap_bookmarks.css({width: numBookmarks * BOOKMARK_WIDTH + 'px'}); 
-	$('#bookmark_launcher').fadeIn(500);
+	$('#bookmark_launcher').fadeIn(1000);
 }
 
 // searches local icons folder for an icon that matches a given url
