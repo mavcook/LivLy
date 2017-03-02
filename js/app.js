@@ -87,9 +87,12 @@ getFiles(iconsDir, function(data){
 function autoCycle()
 {
 	var d = new Date(localStorage.date);
+	var nextDayStr = d.getFullYear() + ' ' + d.getMonth() + ' ' + (d.getDate() + 1);
+	var nextDay = new Date(nextDayStr);
 	var now = new Date();
 
-	if (now > d && ( now.getDate() > d.getDate() && now.getMonth() >= d.getMonth()))
+	if (nextDay >= d || 
+		now.getFullYear() > d.getFullYear()) // 2xxx 12 32 doesn't go to next month like other cases
 	{
 		console.log("New day, new pic. Enjoy");
 		var i = getRandomInt(0, BG_PICS.length);
