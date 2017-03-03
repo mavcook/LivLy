@@ -10,20 +10,21 @@ var KEYS = {
 };
 
 function getFiles(directory, callback) {
-  chrome.runtime.getPackageDirectoryEntry(function(root) {
-    root.getDirectory(directory, {create: false}, function(localesdir) {
-      var reader = localesdir.createReader();
-      // Assumes that there are fewer than 100 locales; otherwise see DirectoryReader docs
-      reader.readEntries(function(results) {
-        callback(results.map(function(de){return de.name;}).sort());
-      });
-    });
-  });
+chrome.runtime.getPackageDirectoryEntry(function(root) {
+	root.getDirectory(directory, {create: false}, function(localesdir) {
+		var reader = localesdir.createReader();
+		// Assumes that there are fewer than 100 locales; otherwise see DirectoryReader docs
+		reader.readEntries(function(results) {
+			callback(results.map(function(de){return de.name;}).sort());
+		});
+	});
+});
 }
 
 
+
 function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // Fix for JS not doing mod properly on negatives
@@ -65,7 +66,11 @@ else
 				// create full path
 				for (var j = 0; j < data.length; ++j)
 					data[j] = bgDir + '/' + data[j];
-				BG_PICS = data;
+				BG_PICS = data.sort(function(a,b){
+					a = a.substr(a.length - 10, a.length - 5);
+					b = a.substr(b.length - 10, b.length - 5);
+					return a > (b);
+				});
 				localStorage.BG_PICS = JSON.stringify(BG_PICS);
 				console.log("Load from dir", data);
 				localStorage.removeItem('refreshPics');
@@ -87,11 +92,11 @@ getFiles(iconsDir, function(data){
 function autoCycle()
 {
 	var d = new Date(localStorage.date);
-	var nextDayStr = d.getFullYear() + ' ' + d.getMonth() + ' ' + (d.getDate() + 1);
+	var nextDayStr = d.getFullYear() + ' ' + (d.getMonth()+1) + ' ' + (d.getDate() + 1);
 	var nextDay = new Date(nextDayStr);
 	var now = new Date();
 
-	if (nextDay >= d || 
+	if (now >= nextDay || 
 		now.getFullYear() > d.getFullYear()) // 2xxx 12 32 doesn't go to next month like other cases
 	{
 		console.log("New day, new pic. Enjoy");
@@ -101,6 +106,7 @@ function autoCycle()
 	}
 	else changePic(0);
 }
+
 
 
 // loads previous settings if exist
@@ -123,6 +129,7 @@ function loadLocalStorage()
 
 	if (localStorage.name)
 		$('#name').html(localStorage.name);
+	// TODO: sync storage
 }
 
 
@@ -180,6 +187,15 @@ $('document').ready(function(){
 		toggleBookmarkDock();
 	});
 
+	var timeoutId = 0;
+	$('.bookmarks').on('mousedown', function() {
+		console.log("Sdad");
+		timeoutId = setTimeout(function(){
+			console.log("hey");}, 100);
+	}).on('mouseup mouseleave', function() {
+		clearTimeout(timeoutId);
+	});
+
 
 	loadJSON('bookmarks.json', createBookmarks);
 });
@@ -233,7 +249,7 @@ function createBookmarks(json)
 
 		bDiv.append(icon);
 		link.append(bDiv);
-		wrap_bookmarks.append(link);
+		wrap_bookmarks.append(bDiv);
 		numBookmarks++;
 	}
 	wrap_bookmarks.css({width: numBookmarks * BOOKMARK_WIDTH + 'px'}); 
@@ -291,6 +307,8 @@ function loadJSON(filename, callback)
 		});
 	});
 }
+// $.getJSON('/test.json', function(e) {
+// });
 
 
 function changeCompliment()
