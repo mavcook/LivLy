@@ -159,10 +159,10 @@ $('document').ready(function(){
 	var nameInputDiv = $('#wrap-input-name');
 	var nameInput =$('#input-name');
 
-	content.fadeIn(1700, function(){$('.shade').fadeIn(1000)});
+	content.fadeIn(1200, function(){$('.shade').fadeIn(1000)});
 
 	name.dblclick(function(){
-
+		// TODO: performance
 		nameInputDiv.fadeIn();
 		content.css({'-webkit-animation': 'top10 1.2s ease forwards'});
 		nameInput.focus();
@@ -200,6 +200,7 @@ $('document').ready(function(){
 		toggleBookmarkDock();
 	});
 
+	// TODO: click and hold to edit
 	var timeoutId = 0;
 	$('.bookmarks').on('mousedown', function() {
 		console.log("Sdad");
@@ -225,6 +226,7 @@ document.onkeypress = function (e) {
 var wrap_bookmarks = $('#wrap-bookmarks');
 function toggleBookmarkDock()
 {
+	// TODO: laggy on first time opening
 	if (wrap_bookmarks.is(":visible"))
 	{
 		wrap_bookmarks.fadeOut();
@@ -247,8 +249,7 @@ function createBookmarks(json)
 	for (var key in bm)
 	{
 		var b = bm[key];
-		var link = $('<a>', {href: b.src});
-		var bDiv = $('<div>', {class: "bookmark"});
+		var link = $('<a>', {href: b.src, class: "bookmark"});
 		var icon = $('<img>', {src: b.icon});
 
 		// look for or create icon if none is specified
@@ -260,8 +261,7 @@ function createBookmarks(json)
 			else icon.attr({src: iconsDir + '/' + standardIcon})
 		}
 
-		bDiv.append(icon);
-		link.append(bDiv);
+		link.append(icon);
 		wrap_bookmarks.append(link);
 		numBookmarks++;
 	}
