@@ -1,7 +1,7 @@
 import subprocess as sp
 import shutil
 
-exclude = ['.git', 'uncompressed', '.vscode', '.gitignore', 'compressor.py', 'README.md', 'package.py']
+exclude = ['.git', 'uncompressed', 'ext', '.vscode', '.gitignore', 'compressor.py', 'README.md', 'package.py']
 shutil.copytree('.' , '../LivLy' ,ignore=shutil.ignore_patterns(*exclude))
 
 # make crx

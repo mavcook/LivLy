@@ -61,6 +61,14 @@ function loadLocalStorage()
 		COMPLIMENTS = JSON.parse(localStorage.compliments);
 		changeCompliment();
 	}
+
+	if (!localStorage.bookmarks)
+		loadJSON('bookmarks.json', createBookmarks);
+	else
+	{
+		var bookmarks = JSON.parse(localStorage.bookmarks);
+		createBookmarks(bookmarks);
+	}
 	// TODO: sync storage
 }
 
@@ -261,7 +269,6 @@ $('document').ready(function(){
 		clearTimeout(timeoutId);
 	});
 
-	loadJSON('bookmarks.json', createBookmarks);
 });
 
 // Only toggle dock when name isn't being changed
@@ -292,6 +299,7 @@ var BOOKMARK_WIDTH = 172; //TODO: make this dynamic
 function createBookmarks(json)
 {
 	console.log("Bookmarks JSON", json);
+	localStorage.bookmarks = JSON.stringify(json);
 	var bm = json.bookmarks;
 	
 	var numBookmarks = 0;

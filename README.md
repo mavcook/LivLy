@@ -7,8 +7,32 @@ by pressing the spacebar, or the arrow indicator at the bottom of the screen.
 If you don't like the picture of the day, just cycle through the images until you find one you like.
 Min resolution: 800x680
 
+[Download]()
+
+![Screenshot 1](/ext/1.png?raw=true)
+![Screenshot 2](/ext/2.png?raw=true)
+![Screenshot 3](/ext/3.png?raw=true)
+
+# User Guide
+
+## Edit Bookmarks
+### Via User Interface
+Coming soon
+### Via Chrome Console
+```
+var bm = JSON.parse(localStorage.bookmarks);
+// Edit as you like, example:
+bm.bookmarks[1] = {src: 'http://mavcook.com', icon: '', name: 'Maverick Cook', short_name: 'Mavcook'}
+// Save
+localStorage.bookmarks = JSON.stringify(bm)
+```
+Then reload the newtab page.
+To get back to defaults
+```
+localStorage.removeItem('bookmarks')
+
 
 # Image rights
 I use only public domain images for the backgrounds, however I would still like
-to have the photographer credited. Some of the links I saved to the images are now broken,
-so if you find a photographer of a photo, please make a pull request with the credits
+to have the photographers credited. Some of the links I saved to the images are now broken,
+so if you find a photographer of a photo, please make a pull request with the credits.
