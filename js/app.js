@@ -3,7 +3,7 @@ var ICONS = [];
 var COMPLIMENTS;
 var iconsDir = "icons";
 var bgDir = "bg";
-var BG_RES = [1366, 1600, 1920, 2560, 3840];
+var BG_RES = [1366, 1600, 1920, 2560];//, 3840, 5120];
 var KEYS = {
 	space: 32,
 	enter: 13
@@ -213,18 +213,18 @@ document.onkeypress = function (e) {
 };
 
 // shows or hides the bookmark dock
-var bookmarks = $('#wrap-bookmarks');
+var wrap_bookmarks = $('#wrap-bookmarks');
 function toggleBookmarkDock()
 {
-	if (bookmarks.is(":visible"))
+	if (wrap_bookmarks.is(":visible"))
 	{
-		bookmarks.fadeOut();
+		wrap_bookmarks.fadeOut();
 	}
 	else
 	{
-		bookmarks.css({'-webkit-animation': 'top90_to_68 .7s ease forwards'});
+		wrap_bookmarks.css({'-webkit-animation': 'top90_to_68 .7s ease forwards'});
 		/* TODO: allow overflow so multiple rows of bookmarks can scroll */
-		bookmarks.fadeIn();
+		wrap_bookmarks.fadeIn();
 	}
 }
 
@@ -233,7 +233,6 @@ function createBookmarks(json)
 {
 	console.log("Bookmarks JSON", json);
 	var bm = json.bookmarks;
-	var wrap_bookmarks = $('#wrap-bookmarks');
 	
 	var numBookmarks = 0;
 	for (var key in bm)
@@ -243,18 +242,18 @@ function createBookmarks(json)
 		var bDiv = $('<div>', {class: "bookmark"});
 		var icon = $('<img>', {src: b.icon});
 
-		// look for or create icon if non specified
+		// look for or create icon if none is specified
 		if (b.icon === "")
 		{
 			var standardIcon = getIcon(b.src);
 			if (!standardIcon)
-				icon = $('<h1>').html(getDomainName(b.src)[0].toUpperCase());
+				icon = $('<h1>').html(getDomainName(b.src).slice(0,2).toUpperCase());
 			else icon.attr({src: iconsDir + '/' + standardIcon})
 		}
 
 		bDiv.append(icon);
 		link.append(bDiv);
-		wrap_bookmarks.append(bDiv);
+		wrap_bookmarks.append(link);
 		numBookmarks++;
 	}
 	wrap_bookmarks.css({width: numBookmarks * BOOKMARK_WIDTH + 'px'}); 
