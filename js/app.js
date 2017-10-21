@@ -3,11 +3,13 @@ var ICONS = [];
 var COMPLIMENTS;
 var iconsDir = "icons";
 var bgDir = "bg";
-var BG_RES = [1366, 1920, 2560, 3840];
+var BG_RES = [1366, 1600, 1920, 2560, 3840];
 var KEYS = {
 	space: 32,
 	enter: 13
 };
+
+
 
 function getFiles(directory, callback) {
 chrome.runtime.getPackageDirectoryEntry(function(root) {
@@ -21,7 +23,10 @@ chrome.runtime.getPackageDirectoryEntry(function(root) {
 });
 }
 
-
+//TODO: download files
+// for compliments, pictures, settings
+// setting for dock to show up immediatley
+// click and hold anywhere for settings to appear
 
 function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -32,6 +37,7 @@ Number.prototype.mod = function(n) {
 	return ((this%n)+n)%n;
 }
 
+var bg = $('#bg');
 // TODO: convert to using pic keys so pictures can be moved/deleted
 function changePic(increment)
 {
@@ -42,7 +48,7 @@ function changePic(increment)
 	i = (i + increment).mod(BG_PICS.length);
 
 	localStorage.picIdx =  i;
-	var bg = $('#bg');
+	
 	bg.css('background-image', 'url(' + BG_PICS[i] + ')');
 	if (bg.is(':visible') === false)
 		bg.fadeIn(600);
@@ -91,18 +97,16 @@ getFiles(iconsDir, function(data){
 // loads a random picture on a new day
 function autoCycle()
 {
-	var d = new Date(localStorage.date);
-	var nextDayStr = d.getFullYear() + ' ' + (d.getMonth()+1) + ' ' + (d.getDate() + 1);
-	var nextDay = new Date(nextDayStr);
-	var now = new Date();
+	var lastDay = parseInt(localStorage.lastDay);
+	var currentDay = new Date().getDate();
 
-	if (now >= nextDay || 
-		now.getFullYear() > d.getFullYear()) // 2xxx 12 32 doesn't go to next month like other cases
+	if (currentDay != lastDay) // will be incorrect if loaded on same day of month, 
+	// but that is only 1 failure/mo which is acceptable
 	{
 		console.log("New day, new pic. Enjoy");
 		var i = getRandomInt(0, BG_PICS.length);
 		changePic(i);
-		localStorage.date = now;
+		localStorage.lastDay = currentDay;
 	}
 	else changePic(0);
 }
@@ -113,7 +117,7 @@ function autoCycle()
 function loadLocalStorage()
 {
 	if (!localStorage.date)
-		localStorage.date = new Date();
+		localStorage.lastDay = new Date().getDate();
 
 	// compliments
 	if (!localStorage.compliments)
@@ -200,17 +204,18 @@ $('document').ready(function(){
 	loadJSON('bookmarks.json', createBookmarks);
 });
 
+var wrapName = $('#wrap-input-name');
 document.onkeypress = function (e) {
 	e = e || window.event;
-	if (e.keyCode === KEYS.space && $('#wrap-input-name').is(":visible") === false)
+	if (e.keyCode === KEYS.space && wrapName.is(":visible") === false)
 		toggleBookmarkDock();
 	// TODO: switch and shortcuts 1->goto first bookmark
 };
 
 // shows or hides the bookmark dock
+var bookmarks = $('#wrap-bookmarks');
 function toggleBookmarkDock()
 {
-	var bookmarks = $('#wrap-bookmarks');
 	if (bookmarks.is(":visible"))
 	{
 		bookmarks.fadeOut();
@@ -310,9 +315,9 @@ function loadJSON(filename, callback)
 // $.getJSON('/test.json', function(e) {
 // });
 
-
+var compliment = $('#compliment');
 function changeCompliment()
 {
 	var idx = getRandomInt(0, COMPLIMENTS.length - 1);
-	$('#compliment').html(COMPLIMENTS[idx].text);
+	compliment.html(COMPLIMENTS[idx].text);
 }

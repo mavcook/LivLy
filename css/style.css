@@ -9,6 +9,12 @@
 	src: url('/fonts/Montserrat-Regular.woff') format('woff');
 }
 
+img {
+  image-rendering: auto;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
 html, body { 
 	width: 100%; 
 	height: 100%;
