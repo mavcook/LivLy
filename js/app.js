@@ -3,105 +3,117 @@ var ICONS = [];
 var COMPLIMENTS;
 var iconsDir = "icons";
 var bgDir = "bg";
+var bg = document.getElementById('bg');
+var compliment;
 // oversized images cause slow load when creating a new tab
 var BG_RES = [1366, 1600, 1920, 2560];//, 3840, 5120];
 var KEYS = {
 	space: 32,
 	enter: 13
 };
-
-
-
-function getFiles(directory, callback) {
-chrome.runtime.getPackageDirectoryEntry(function(root) {
-	root.getDirectory(directory, {create: false}, function(localesdir) {
-		var reader = localesdir.createReader();
-		// Assumes that there are fewer than 100 locales; otherwise see DirectoryReader docs
-		reader.readEntries(function(results) {
-			callback(results.map(function(de){return de.name;}).sort());
-		});
-	});
-});
-}
-
 //TODO: download files
 // for compliments, pictures, settings
 // setting for dock to show up immediatley
 // click and hold anywhere for settings to appear
 
-function getRandomInt(min, max) {
+
+// Loaders
+function loadComps(json)
+{
+	COMPLIMENTS = json.compliments;
+	localStorage.compliments = JSON.stringify(COMPLIMENTS);
+	changeCompliment();
+}
+
+function loadJSON(filename, callback)
+{
+	chrome.runtime.getPackageDirectoryEntry(function(root) {
+		root.getFile(filename, {}, function(fileEntry) {
+			fileEntry.file(function(file) {
+				var reader = new FileReader();
+				reader.onloadend = function(e) {
+					var myFile = JSON.parse(this.result);
+					callback(myFile);
+				};
+				reader.readAsText(file);
+			});
+		});
+	});
+}
+
+// loads previous settings if exist
+function loadLocalStorage()
+{
+	if (localStorage.name)
+		$('#name').html(localStorage.name);
+
+	if (!localStorage.date)
+		localStorage.lastDay = new Date().getDate();
+
+	// compliments
+	if (!localStorage.compliments)
+	{
+		loadJSON('compliments.json', loadComps);
+		console.log("loading compliments from file");
+	}
+	else
+	{
+		COMPLIMENTS = JSON.parse(localStorage.compliments);
+		changeCompliment();
+	}
+	// TODO: sync storage
+}
+
+function getFiles(directory, callback) 
+{
+	chrome.runtime.getPackageDirectoryEntry(function(root) {
+		root.getDirectory(directory, {create: false}, function(localesdir) {
+			var reader = localesdir.createReader();
+			// Assumes that there are fewer than 100 locales; otherwise see DirectoryReader docs
+			reader.readEntries(function(results) {
+				callback(results.map(function(de){return de.name;}).sort());
+			});
+		});
+	});
+}
+	
+	
+
+// Helpers
+function getRandomInt(min, max) 
+{
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // Fix for JS not doing mod properly on negatives
-Number.prototype.mod = function(n) {
+Number.prototype.mod = function(n) 
+{
 	return ((this%n)+n)%n;
 }
 
-var bg = document.getElementById('bg')
-// TODO: convert to using pic keys so pictures can be moved/deleted
-function changePic(increment)
+// excludes WWW.
+function getDomainName(url)
 {
-	var i = 0;
-	if (localStorage.picIdx)
-		i = parseInt(localStorage.picIdx);
-
-	i = (i + increment).mod(BG_PICS.length);
-
-	localStorage.picIdx =  i;
-	
-
-	bg.style.backgroundImage = 'url(' + BG_PICS[i] + ')';
-	
-	var img = new Image();
-	// dont fade in until load is done
-	img.onload = function() {
-		bg.className = 'fadein';
-	}
-	img.src = BG_PICS[i];
-	if (img.complete) 
-		img.onload();
+	if(url.search(/^https?\:\/\//) != -1)
+		url = url.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i, "");
+	else
+		url = url.match(/^(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i, "");
+	return url[1];
 }
 
-// figure out which folder (res) pics to use
-if (localStorage.BG_PICS && !localStorage.refreshPics)
-{	BG_PICS = JSON.parse(localStorage.BG_PICS);
-	console.log("Load from local storage", BG_PICS);
-	autoCycle();
-}
-else
+// searches local icons folder for an icon that matches a given url
+function getIcon(url)
 {
-	var screenWidth = window.screen.width;
-	for (var i = 0; i < BG_RES.length; ++i)
+	var domain = getDomainName(url);
+
+	// TODO: look into getting JSON listing of a directory
+	for (var i = 0; i < ICONS.length; i++)
 	{
-		if (BG_RES[i] >= screenWidth)
-		{
-			bgDir += '/' + BG_RES[i];
-			getFiles(bgDir, function(data){
-				// create full path
-				for (var j = 0; j < data.length; ++j)
-					data[j] = bgDir + '/' + data[j];
-				BG_PICS = data.sort(function(a,b){
-					a = a.substr(a.length - 10, a.length - 5);
-					b = a.substr(b.length - 10, b.length - 5);
-					return a > (b);
-				});
-				localStorage.BG_PICS = JSON.stringify(BG_PICS);
-				console.log("Load from dir", data);
-				localStorage.removeItem('refreshPics');
-				autoCycle();
-			});
-			break;
-		}
+		if (ICONS[i].indexOf(domain) !== -1)
+			return ICONS[i];
 	}
+	return null;
 }
-
-
-
-
-getFiles(iconsDir, function(data){
-	ICONS = data;
-});
 
 // loads a random picture on a new day
 function autoCycle()
@@ -120,36 +132,77 @@ function autoCycle()
 	else changePic(0);
 }
 
-
-
-// loads previous settings if exist
-function loadLocalStorage()
+// TODO: convert to using pic keys so pictures can be moved/deleted
+function changePic(increment)
 {
-	if (!localStorage.date)
-		localStorage.lastDay = new Date().getDate();
+	var i = 0;
+	if (localStorage.picIdx)
+		i = parseInt(localStorage.picIdx);
+	i = (i + increment).mod(BG_PICS.length);
 
-	// compliments
-	if (!localStorage.compliments)
-	{
-		loadJSON('compliments.json', loadComps);
-		console.log("loading compliments from file");
-	}
-	else
-	{
-		COMPLIMENTS = JSON.parse(localStorage.compliments);
-		changeCompliment();
-	}
+	localStorage.picIdx =  i;
+	
 
-	if (localStorage.name)
-		$('#name').html(localStorage.name);
-	// TODO: sync storage
+	bg.style.backgroundImage = 'url(' + BG_PICS[i] + ')';
+	
+	var img = new Image();
+	// dont fade in until load is done
+	img.onload = function(){ bg.className = 'fadein'; };
+	img.src = BG_PICS[i];
+	if (img.complete) 
+		img.onload();
 }
 
 
+
+
+
+function main()
+{
+	getFiles(iconsDir, function(data){
+		ICONS = data;
+	});
+
+	// figure out which folder (res) pics to use
+	if (localStorage.BG_PICS && !localStorage.refreshPics)
+	{	BG_PICS = JSON.parse(localStorage.BG_PICS);
+		console.log("Load from local storage", BG_PICS);
+		autoCycle();
+	}
+	else
+	{
+		var screenWidth = window.screen.width;
+		for (var i = 0; i < BG_RES.length; ++i)
+		{
+			if (BG_RES[i] >= screenWidth)
+			{
+				bgDir += '/' + BG_RES[i];
+				getFiles(bgDir, function(data){
+					// create full path
+					for (var j = 0; j < data.length; ++j)
+						data[j] = bgDir + '/' + data[j];
+					BG_PICS = data.sort(function(a,b){
+						a = a.substr(a.length - 10, a.length - 5);
+						b = a.substr(b.length - 10, b.length - 5);
+						return a > (b);
+					});
+					localStorage.BG_PICS = JSON.stringify(BG_PICS);
+					console.log("Load from dir", data);
+					localStorage.removeItem('refreshPics');
+					autoCycle();
+				});
+				break;
+			}
+		}
+	}
+}
+
+main();
+
 $('document').ready(function(){
 
+	compliment = $('#compliment');
 	loadLocalStorage();
-
 
 	$('#nextPic').click(function(){ changePic(1) });
 	$('#prevPic').click(function(){ changePic(-1) });
@@ -158,6 +211,7 @@ $('document').ready(function(){
 	var name = $('#name');
 	var nameInputDiv = $('#wrap-input-name');
 	var nameInput =$('#input-name');
+	
 
 	content.fadeIn(1200, function(){$('.shade').fadeIn(1000)});
 
@@ -175,7 +229,7 @@ $('document').ready(function(){
 			if (!input.replace(/\s/g, '').length) //just whitespace
 				return;
 			localStorage.setItem('name', input);
-			$('#name').html(input);
+			name.html(input);
 			nameInput.val('');
 			content.css({'-webkit-animation': 'top10_to_45 1.2s ease forwards'});
 			
@@ -184,17 +238,14 @@ $('document').ready(function(){
 	});
 
 	$('#wrap-input-name').focusout(function(){
-
 		nameInput.val('');
 		content.css({'-webkit-animation': 'top10_to_45 1.2s ease forwards'});
 		nameInputDiv.fadeOut();
-		
 	});
 
-	$('#compliment').dblclick(function(){
+	compliment.dblclick(function(){
 		changeCompliment();
 	});
-
 
 	$('#bookmark_launcher').click(function(){
 		toggleBookmarkDock();
@@ -210,10 +261,10 @@ $('document').ready(function(){
 		clearTimeout(timeoutId);
 	});
 
-
 	loadJSON('bookmarks.json', createBookmarks);
 });
 
+// Only toggle dock when name isn't being changed
 var wrapName = $('#wrap-input-name');
 document.onkeypress = function (e) {
 	e = e || window.event;
@@ -228,9 +279,7 @@ function toggleBookmarkDock()
 {
 	// TODO: laggy on first time opening
 	if (wrap_bookmarks.is(":visible"))
-	{
 		wrap_bookmarks.fadeOut();
-	}
 	else
 	{
 		wrap_bookmarks.css({'-webkit-animation': 'top90_to_68 .7s ease forwards'});
@@ -269,61 +318,7 @@ function createBookmarks(json)
 	$('#bookmark_launcher').fadeIn(1000);
 }
 
-// searches local icons folder for an icon that matches a given url
-function getIcon(url)
-{
-	var domain = getDomainName(url);
 
-	// TODO: look into getting JSON listing of a directory
-	for (var i = 0; i < ICONS.length; i++)
-	{
-		if (ICONS[i].indexOf(domain) !== -1)
-			return ICONS[i];
-	}
-	return null;
-}
-
-// excludes WWW.
-function getDomainName(url)
-{
-	if(url.search(/^https?\:\/\//) != -1)
-		url = url.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i, "");
-	else
-		url = url.match(/^(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i, "");
-	return url[1];
-}
-
-
-
-function loadComps(json)
-{
-	COMPLIMENTS = json.compliments;
-	localStorage.compliments = JSON.stringify(COMPLIMENTS);
-	changeCompliment();
-}
-
-
-
-
-function loadJSON(filename, callback)
-{
-	chrome.runtime.getPackageDirectoryEntry(function(root) {
-		root.getFile(filename, {}, function(fileEntry) {
-			fileEntry.file(function(file) {
-				var reader = new FileReader();
-				reader.onloadend = function(e) {
-					var myFile = JSON.parse(this.result);
-					callback(myFile);
-				};
-				reader.readAsText(file);
-			});
-		});
-	});
-}
-// $.getJSON('/test.json', function(e) {
-// });
-
-var compliment = $('#compliment');
 function changeCompliment()
 {
 	var idx = getRandomInt(0, COMPLIMENTS.length - 1);
