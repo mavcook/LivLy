@@ -19,7 +19,7 @@ Min resolution: 800x680
 ### Via User Interface
 Coming soon
 ### Via Chrome Console
-```
+```javascript
 var bm = JSON.parse(localStorage.bookmarks);
 // Edit as you like, example:
 bm.bookmarks[1] = {src: 'http://mavcook.com', icon: '', name: 'Maverick Cook', short_name: 'Mavcook'}
@@ -28,9 +28,9 @@ localStorage.bookmarks = JSON.stringify(bm)
 ```
 Then reload the newtab page.
 To get back to defaults
-```
+```javascript
 localStorage.removeItem('bookmarks')
-
+```
 
 # Image rights
 I use only public domain images for the backgrounds, however I would still like
