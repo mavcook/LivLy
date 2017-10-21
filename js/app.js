@@ -3,6 +3,7 @@ var ICONS = [];
 var COMPLIMENTS;
 var iconsDir = "icons";
 var bgDir = "bg";
+// oversized images cause slow load when creating a new tab
 var BG_RES = [1366, 1600, 1920, 2560];//, 3840, 5120];
 var KEYS = {
 	space: 32,
@@ -37,7 +38,7 @@ Number.prototype.mod = function(n) {
 	return ((this%n)+n)%n;
 }
 
-var bg = $('#bg');
+var bg = document.getElementById('bg')
 // TODO: convert to using pic keys so pictures can be moved/deleted
 function changePic(increment)
 {
@@ -49,9 +50,17 @@ function changePic(increment)
 
 	localStorage.picIdx =  i;
 	
-	bg.css('background-image', 'url(' + BG_PICS[i] + ')');
-	if (bg.is(':visible') === false)
-		bg.fadeIn(600);
+
+	bg.style.backgroundImage = 'url(' + BG_PICS[i] + ')';
+	
+	var img = new Image();
+	// dont fade in until load is done
+	img.onload = function() {
+		bg.className = 'fadein';
+	}
+	img.src = BG_PICS[i];
+	if (img.complete) 
+		img.onload();
 }
 
 // figure out which folder (res) pics to use

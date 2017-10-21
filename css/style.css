@@ -33,12 +33,21 @@ html, body {
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	display: none;
+	opacity: 0;
 	background: no-repeat center center fixed;
 	-webkit-background-size: cover;
 	background-size: cover;
-	transition: background .5s linear;
+	transition: background .3s linear; 
+	will-change: opacity; /*idk if this actually helps*/
 }
+.fadein { animation: fadein 1s ease-out forwards;	}
+
+@keyframes fadein 
+{
+    from { opacity: 0; }
+    to { opacity: 1;}			
+}
+
 
 #greeting { 
 	font-family: 'L_Cursive';
@@ -201,8 +210,8 @@ input[type=text]
 	display:none;
 }
 
-svg polyline {transition: .3s;}
-#bookmark_launcher:hover > svg polyline
+svg path {transition: .3s;}
+#bookmark_launcher:hover > svg path
 {
 	stroke: rgb(255,255,255);
 }
