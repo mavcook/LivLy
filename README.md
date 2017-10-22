@@ -11,8 +11,7 @@ Min resolution: 800x680
 
 ![Screenshot 1](/ext/0.png?raw=true)
 ![Screenshot 2](/ext/2.png?raw=true)
-![Edit name](/ext/2.1.png?raw=true)
-![Edit name 2](/ext/2.2.png?raw=true)
+![Edit name](/ext/2.3.png?raw=true)
 
 # User Guide
 
