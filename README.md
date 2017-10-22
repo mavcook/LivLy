@@ -7,7 +7,7 @@ by pressing the spacebar, or the arrow indicator at the bottom of the screen.
 If you don't like the picture of the day, just cycle through the images until you find one you like.
 Min resolution: 800x680
 
-[Download]()
+[Download from Chrome Web Store](https://chrome.google.com/webstore/detail/livly/jodlifhapikdhppocniogknenmjlaiog)
 
 ![Screenshot 1](/ext/0.png?raw=true)
 ![Screenshot 2](/ext/2.png?raw=true)
