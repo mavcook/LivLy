@@ -4,6 +4,11 @@
 	"version": "0.1.2",
 	"description": "A non-distracting, minimalist newtab page.",
 
+	"icons": { 
+		"64": "icon64.png",
+		"128": "icon128.png"
+	},
+
 	"browser_action": {
 		"default_title": "LivLy"
 	},
