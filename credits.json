@@ -30,7 +30,7 @@
             "authorUrl": "https://unsplash.com/@aleskrivec",
             "imgUrl": "https://unsplash.com/photos/nO0V_T0g2fM"
         },
-        "mountain-snow-peak-blue-sky.jpg" : {
+        "mountain-snow-peak-blue-sky_q90.webp" : {
             "author": "Alex Krivec",
             "authorUrl": "https://unsplash.com/@aleskrivec",
             "imgUrl": "https://unsplash.com/photos/58zgsq3c63g"
@@ -75,7 +75,7 @@
 
 
 
-        "matthew-henry-300.jpg" : {
+        "matthew-henry-300_q90.webp" : {
             "author": "Matthew Henry",
             "authorUrl": "https://unsplash.com/@matthewhenry",
             "imgUrl": "https://unsplash.com/photos/nOhUx3tiaQQ"
@@ -110,8 +110,187 @@
             "author": "William Bout",
             "authorUrl": "http://williambout.me/",
             "imgUrl": "https://unsplash.com/photos/7cdFZmLlWOM"
-        }
+        },
 
+
+        
+        "alberto-restifo-44224.jpg" : {
+            "author": "Alberto Restifo",
+            "authorUrl": "https://github.com/albertorestifo",
+            "imgUrl": "https://unsplash.com/photos/PjQDxAixxc0"
+        },
+
+        
+        "architecture-building-business-city-211929.jpeg" : {
+            "author": "unknown",
+            "authorUrl": "unknown",
+            "imgUrl": "unknown. Orig: https://www.pexels.com/photo/architecture-building-business-city-211929/"
+        },
+        
+        
+
+        "arctic-plane-crash-blue-grey.jpg" : {
+            "author": "unknown",
+            "authorUrl": "unknown",
+            "imgUrl": "http://publicdomainarchive.com/public-domain-images-arctic-plane-crash-blue-grey/"
+        },
+
+        "beach-coast-nature-ocean-241036.jpeg" : {
+            "author": "unknown",
+            "authorUrl": "unknown",
+            "imgUrl": "unknown. orig: https://www.pexels.com/photo/beach-coast-nature-ocean-241036/"
+        },
+
+
+        "clouds-sky-mountain-blue.jpg" : {
+            "author": "unknown",
+            "authorUrl": "unknown",
+            "imgUrl": "http://publicdomainarchive.com/public-domain-images-clouds-sky-mountain-blue/"
+        },
+
+
+        "coconut-tree-on-shore-during-daylight-149542.jpeg" : {
+            "author": "Joe deSousa",
+            "authorUrl": "https://www.flickr.com/photos/mustangjoe/",
+            "imgUrl": "https://www.pexels.com/photo/coconut-tree-on-shore-during-daylight-149542/"
+        },
+
+
+        "daylight-environment-forest-grass-105240.jpeg" : {
+            "author": "Kaique Rocha",
+            "authorUrl": "https://www.pexels.com/u/kaiquestr/",
+            "imgUrl": "https://www.pexels.com/photo/daylight-environment-forest-grass-105240/"
+        },
+
+
+        "green-grass-132957.jpeg" : {
+            "author": "unknown",
+            "authorUrl": "unknown",
+            "imgUrl": "unknown. orig: https://www.pexels.com/photo/green-grass-132957/"
+        },
+
+
+        "landscape-mountains-abendstimmung-640617.png" : {
+            "author": "Jörg Peter",
+            "authorUrl": "https://pixabay.com/en/users/jpeter2-697843/",
+            "imgUrl": "https://pixabay.com/en/landscape-mountains-abendstimmung-640617/"
+        },
+		
+		"sadf" : {
+            "author": "unknown",
+            "authorUrl": "unknown",
+            "imgUrl": "unknown"
+        },
+
+
+        "landscape-scotland-nature-highlands-and-islands-45888_q90.webp" : {
+            "author": "Frank Winkler",
+            "authorUrl": "https://pixabay.com/en/users/FrankWinkler-64960/",
+            "imgUrl": "https://pixabay.com/en/landscape-scotland-nature-540116/"
+        },
+		"rock-scotland-isle-of-skye-540130_q90.webp" : {
+            "author": "Frank Winkler",
+            "authorUrl": "https://pixabay.com/en/users/FrankWinkler-64960/",
+            "imgUrl": "https://pixabay.com/en/rock-scotland-isle-of-skye-540130/"
+        },
+		"rock-stacks-of-duncansby-scotland-192989_q90.webp" : {
+            "author": "Frank Winkler",
+            "authorUrl": "https://pixabay.com/en/users/FrankWinkler-64960/",
+            "imgUrl": "https://pixabay.com/en/rock-stacks-of-duncansby-scotland-192989/"
+        },
+		"scotland-united-kingdom-england-isle-of-skye-39003_q90.webp" : {
+            "author": "Frank Winkler",
+            "authorUrl": "https://pixabay.com/en/users/FrankWinkler-64960/",
+            "imgUrl": "https://pixabay.com/en/scotland-united-kingdom-england-540119/"
+        },
+		
+		
+		"landscape-mountains-nature-lake-4062_q90.webp" : {
+            "author": "unknown",
+            "authorUrl": "https://pixabay.com/en/users/Free-Photos-242387/",
+            "imgUrl": "https://pixabay.com/en/mountains-lake-reflection-calm-593178/"
+        },
+		
+		"lighted-city-skylines-under-deep-blue-sky-during-night-time-28221_q90.webp" : {
+            "author": "Joel Desrochers",
+            "authorUrl": "https://unsplash.com/@ijoelpod",
+            "imgUrl": "https://unsplash.com/photos/JRUMENMZLos"
+        },
+		
+		"morning-sun-rise-spring-time-white-blossom-branches_q90.webp" : {
+            "author": "unknown",
+            "authorUrl": "unknown",
+            "imgUrl": "http://publicdomainarchive.com/public-domain-images-free-stock-photos-morning-sun-rise-spring-time-white-blossom-branches/"
+        },
+		
+		
+		"mountain-and-lake-at-sunset-135157_q90.webp" : {
+            "author": "Monika",
+            "authorUrl": "https://pixabay.com/en/users/monicore-1499084/?tab=latest",
+            "imgUrl": "https://pixabay.com/en/landscape-mountains-sea-sunrise-1536932/"
+        },
+		
+		
+		"mountains-panorama-landscape-massif-1660789_q90.webp" : {
+            "author": "Thomas Ulrich",
+            "authorUrl": "https://pixabay.com/en/users/LoboStudioHamburg-13838/",
+            "imgUrl": "https://pixabay.com/en/mountains-panorama-landscape-massif-1660789/"
+        },
+		
+		
+		"pink-leaved-tree-during-daytime-101529_q90.webp" : {
+            "author": "unknown",
+            "authorUrl": "unknown",
+            "imgUrl": "https://pixabay.com/en/winter-snow-frost-hoarfrost-trees-1835616/"
+        },
+
+
+        "snow-capped-mountains-under-blue-sky-and-white-clouds-115045_q90.webp" : {
+            "author": "Jean-Pierre Brungs",
+            "authorUrl": "https://unsplash.com/@johnnyabroad",
+            "imgUrl": "https://unsplash.com/photos/3XoiSqiX5ms"
+        },
+		
+		
+		"sunrise-phu-quoc-island-ocean_q90.webp" : {
+            "author": "Quang Le",
+            "authorUrl": "https://pixabay.com/en/users/quangle-1584596",
+            "imgUrl": "https://pixabay.com/en/sunrise-phu-quoc-island-ocean-1014711/"
+        },
+		
+		
+		"sunset-ocean-panorama-panoramic-59937_q90.webp" : {
+            "author": "Josh Sorenson",
+            "authorUrl": "https://www.pexels.com/u/joshsorenson/",
+            "imgUrl": "https://www.pexels.com/photo/sunset-ocean-panorama-panoramic-59937/"
+        },
+		
+		
+		
+		"venice-france-water-canal-night-time-romantic-sunset_q90.webp" : {
+            "author": "unknown",
+            "authorUrl": "unknown",
+            "imgUrl": "http://publicdomainarchive.com/venice-france-water-canal-night-time-romantic-sunset/"
+        },
+		
+		"water-ocean-wood-pier-dock-dusk-orange-light-birds_q90.webp" : {
+            "author": "unknown",
+            "authorUrl": "unknown",
+            "imgUrl": "http://publicdomainarchive.com/public-domain-images-unsplash-com-water-ocean-wood-pier-dock-dusk-orange-light-birds/"
+        },
+		
+		"white-petaled-flowers-at-golden-hour-174524_q90.webp" : {
+            "author": "Caio",
+            "authorUrl": "https://www.pexels.com/u/caio/",
+            "imgUrl": "https://www.pexels.com/photo/white-petaled-flowers-at-golden-hour-174524/"
+        },
+		
+		
+		"yellow-flower-near-tree-and-house-under-clear-blue-sky-92968_q90.webp" : {
+            "author": "Mahir Uysal",
+            "authorUrl": "https://unsplash.com/@mahiruysal",
+            "imgUrl": "https://unsplash.com/photos/CNrqbVeQUzw"
+        }
         
     }
     

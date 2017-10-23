@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
 	"name": "LivLy",
-	"version": "0.1.1",
-	"description": "A non-distracting and useful newtab page.",
+	"version": "0.1.2",
+	"description": "A non-distracting, minimalist newtab page.",
 
 	"browser_action": {
 		"default_title": "LivLy"
