@@ -131,7 +131,7 @@ function autoCycle()
 	var lastDay = parseInt(localStorage.lastDay);
 	var currentDay = new Date().getDate();
 
-	if (currentDay != lastDay) // will be incorrect if loaded on same day of month, 
+	if (currentDay != lastDay || !localStorage.BG_PICS) // will be incorrect if loaded on same day of past month, 
 	// but that is only 1 failure/mo which is acceptable
 	{
 		console.log("New day, new pic. Enjoy");
@@ -196,10 +196,10 @@ function main()
 						b = a.substr(b.length - 10, b.length - 5);
 						return a > (b);
 					});
-					localStorage.BG_PICS = JSON.stringify(BG_PICS);
 					console.log("Load from dir", data);
 					localStorage.removeItem('refreshPics');
 					autoCycle();
+					localStorage.BG_PICS = JSON.stringify(BG_PICS);					
 				});
 				break;
 			}
@@ -245,7 +245,6 @@ $('document').ready(function(){
 			var input = nameInput.val();
 			if (!input.replace(/\s/g, '').length) //just whitespace
 				return;
-			console.log('Input baby', input)
 			localStorage.setItem('name', input);
 			nameSpan.html(input);
 			nameInput.val('');
