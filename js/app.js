@@ -14,7 +14,7 @@ var KEYS = {
 //TODO: download files
 // for compliments, pictures, settings
 // setting for dock to show up immediatley
-// click and hold anywhere for settings to appear
+// click and hold anywhere for settings to appear https://stackoverflow.com/questions/40573922/click-and-hold-event-listener-with-javascript
 
 
 // Loaders
