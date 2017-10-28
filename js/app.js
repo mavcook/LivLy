@@ -4,7 +4,7 @@ var COMPLIMENTS;
 var iconsDir = "icons";
 var bgDir = "bg";
 var bg = document.getElementById('bg');
-var compliment;
+var compliment, nameInputDiv, content, nameSpan, nameInput;
 // oversized images cause slow load when creating a new tab
 var BG_RES = [1366, 1600, 1920, 2560];//, 3840, 5120];
 var KEYS = {
@@ -45,7 +45,9 @@ function loadJSON(filename, callback)
 function loadLocalStorage()
 {
 	if (localStorage.name)
-		$('#name').html(localStorage.name);
+		nameSpan.html(localStorage.name);
+	else
+		setName();
 
 	if (!localStorage.date)
 		localStorage.lastDay = new Date().getDate();
@@ -207,27 +209,34 @@ function main()
 
 main();
 
+function setName()
+{
+	// TODO: performance
+	nameInputDiv.fadeIn();
+	content.css({'-webkit-animation': 'top10 1.2s ease forwards'});
+	nameInput.focus();
+}
+
 $('document').ready(function(){
 
 	compliment = $('#compliment');
+	nameInputDiv = $('#wrap-input-name');
+	content = $('#wrap-content');
+	nameSpan = $('#name');
+	nameInput =$('#input-name');
+	
+
 	loadLocalStorage();
 
 	$('#nextPic').click(function(){ changePic(1) });
 	$('#prevPic').click(function(){ changePic(-1) });
 	
-	var content = $('#wrap-content');
-	var name = $('#name');
-	var nameInputDiv = $('#wrap-input-name');
-	var nameInput =$('#input-name');
-	
 
 	content.fadeIn(1200, function(){$('.shade').fadeIn(1000)});
 
-	name.dblclick(function(){
-		// TODO: performance
-		nameInputDiv.fadeIn();
-		content.css({'-webkit-animation': 'top10 1.2s ease forwards'});
-		nameInput.focus();
+	nameSpan.dblclick(function(){
+		console.log('dafuck')
+		setName();
 	});
 	
 	nameInput.keypress(function(e){
@@ -236,8 +245,9 @@ $('document').ready(function(){
 			var input = nameInput.val();
 			if (!input.replace(/\s/g, '').length) //just whitespace
 				return;
+			console.log('Input baby', input)
 			localStorage.setItem('name', input);
-			name.html(input);
+			nameSpan.html(input);
 			nameInput.val('');
 			content.css({'-webkit-animation': 'top10_to_45 1.2s ease forwards'});
 			
