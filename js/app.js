@@ -308,7 +308,6 @@ var BOOKMARK_WIDTH = 172; //TODO: make this dynamic
 function createBookmarks(json)
 {
 	console.log("Bookmarks JSON", json);
-	localStorage.bookmarks = JSON.stringify(json);
 	var bm = json.bookmarks;
 	
 	var numBookmarks = 0;
@@ -324,7 +323,13 @@ function createBookmarks(json)
 			var standardIcon = getIcon(b.src);
 			if (!standardIcon)
 				icon = $('<h1>').html(getDomainName(b.src).slice(0,2).toUpperCase());
-			else icon.attr({src: iconsDir + '/' + standardIcon})
+			else 
+			{
+				icon.attr({src: iconsDir + '/' + standardIcon})
+				// save any found icons
+				b.icon = iconsDir + '/' + standardIcon;
+				bm[key] = b;
+			}
 		}
 
 		link.append(icon);
@@ -333,6 +338,8 @@ function createBookmarks(json)
 	}
 	wrap_bookmarks.css({width: numBookmarks * BOOKMARK_WIDTH + 'px'}); 
 	$('#bookmark_launcher').fadeIn(1000);
+
+	localStorage.bookmarks = JSON.stringify({'bookmarks': bm});
 }
 
 
