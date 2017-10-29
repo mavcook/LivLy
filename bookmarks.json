@@ -1,8 +1,8 @@
 {
 	"bookmarks":
 	{
-		"1": { "src": "https://www.vimeo.com/", "icon": "", "name": "Vimeo", "short_name": "Vimeo"},
-		"2": { "src": "https://www.github.com/", "icon": "", "name": "GitHub", "short_name": "GitHub"},
-		"3": { "src": "http://www.slack.com/", "icon": "", "name": "Slack", "short_name": "Slack"}
+		"1": { "url": "https://www.vimeo.com/", "icon": "", "name": "Vimeo", "short_name": "Vimeo"},
+		"2": { "url": "https://www.github.com/", "icon": "", "name": "GitHub", "short_name": "GitHub"},
+		"3": { "url": "http://www.slack.com/", "icon": "", "name": "Slack", "short_name": "Slack"}
 	}
 }

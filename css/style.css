@@ -156,33 +156,33 @@ input[type=text]
 #prevPic { left: 0;}
 
 #wrap-bookmarks{
-	display:none;
-	max-width: 688px; /* 172 * 4 divs */
+	width: 100%;
 	top: 68%;
 	position: relative;
 	margin: 0 auto;
 	will-change: top;
-}
-#wrap-bookmarks a{
-	text-decoration: none;
-	color: inherit;
+	display: none;
+	justify-content: center;
 }
 
 .bookmark
 {
-	width: 130px;
-	height: 130px;
+	position: relative;
+	width: 140px;
+	height: 140px;
 	
 	border: 1px solid #fff;
-	padding: 10px;
 	margin: 10px;
 	display: inline-block;
 	background-color: rgba(255,255,255,0);
 	transition: .3s;
 
 	text-align: center;
-	line-height: 130px; /* center letter vertically */
+	/* line-height: 130px; center letter vertically */
 	vertical-align: top;
+
+	text-decoration: none;
+	color: inherit;
 }
 .bookmark:hover{
 	background-color: rgba(255,255,255,.1);
@@ -191,11 +191,23 @@ input[type=text]
 {
 	font-size: 400%;
 	margin: 0;
+	margin-top: 5px;
+	line-height: initial;
 }
-.bookmark img
+
+.wrap-icon
 {
-	width: 50%;
-	padding-top: 25%;
+	width: 42%;
+	top: 29%;
+	left: 29%;
+	position: absolute;
+	will-change: top;
+	will-change: width;
+	will-change: left;
+}
+.wrap-icon img{
+	width: 100%;
+	height: auto;
 }
 
 
@@ -237,4 +249,121 @@ svg path {transition: .3s;}
 @-webkit-keyframes fadeIn {
 	0% { opacity: 0;}
 	100%  { opacitiy: 1;}
+}
+
+
+#info
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgba(130, 130, 158, 0.4);
+	display: none;
+	/* width: 130px; */
+	width: calc(100% - 20px);
+	height: calc(100% - 20px);
+	padding: 10px;
+	font-weight: bold;
+	text-shadow: 1px 1px 10px black;
+}
+.input-small {
+	font-size: 1.2em !important;
+	display: block;
+	position: relative;
+	padding: 0.5em 0;
+	text-shadow: 1px 1px 10px black;
+	margin-bottom: 16px;
+	border-bottom: 1px solid rgba(255,255,255,.8) !important;
+	
+}
+#info label {line-height: initial; margin-top: 0.6em; margin-bottom: 0;display: block;}
+
+button {
+	margin: 0 auto;
+	width: 90%;
+	background-color: rgba(0,0,0,0);
+	border: 2px solid rgba(255,255,255,.7);
+	padding: 5px;
+	transition: 0.2s;
+	color: white;
+	cursor: pointer;
+	display: block;
+}
+button:hover{
+	border: 2px solid rgba(255,255,255,1);
+	background-color: rgba(255,255,255,.4);	
+	letter-spacing: 2px;
+}
+#bm-save{
+	float: left;
+	margin: 0;
+	margin-left: 5%;
+	width: 65%;
+}
+#bm-cancel{
+	width: 25%;
+	margin: 0;
+	border-left: none;
+}
+
+@-webkit-keyframes iconUp {
+	0%  { 
+		width: 42%;
+		top: 29%;
+	}
+	100%  {
+		width: 35%;
+		top: -55%;
+		left: 32.5%;
+	}
+}
+
+@-webkit-keyframes iconDown {
+	0%  {
+		width: 35%;
+		top: -55%;
+		left: 32.5%;
+	}
+	100%  { 
+		width: 42%;
+		top: 29%;
+	}
+}
+
+
+@-webkit-keyframes scaleUpBox {
+	0%  { 
+		width: 140px;
+		height: 140px;
+	}
+	100%  {
+		width: 180px;
+		height: 180px;
+	}
+}
+
+/* Cant get animation-direction: reverse to work */
+@-webkit-keyframes scaleDownBox {
+	0%  {
+		width: 180px;
+		height: 180px;
+	}
+	100%  { 
+		width: 140px;
+		height: 140px;
+	}
+}
+
+
+.bookmark-scale-up {
+	animation: scaleUpBox 1.2s ease forwards;
+}
+.bookmark-scale-down {
+	animation: scaleDownBox 1.2s ease forwards;
+}
+.icon-shift-up {
+	animation: iconUp 1.2s ease forwards;
+}
+.icon-shift-down {
+	animation: iconDown 1.2s ease forwards;
 }
