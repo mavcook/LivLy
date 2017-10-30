@@ -43,7 +43,7 @@ function getDomainName(url, level)
 		// ['https://domain', 'com']
 		d = [domains[0].split('://')]
 		if (level !== -1)
-			d = d.push(domains[1]);
+			d.push(domains[1]);
 	}
 	else if (domains.length >= 3)
 	{
