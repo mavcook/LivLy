@@ -8,6 +8,7 @@ var _bgDir = 'bg';
 var _complimentDiv, _nameInputDiv, _contentDiv, _nameSpan, _nameSpan;
 var _bgUrlDiv, _authorDiv;
 var _bookmarks = {};
+var _bm_nameDiv, _bm_urlDiv, _bm_infoDiv;
 
 // oversized images cause slow load when creating a new tab
 var BG_RES = [1366, 1600, 1920, 2560];//, 3840, 5120];
@@ -121,7 +122,7 @@ function loadData()
 						b = a.substr(b.length - 10, b.length - 5);
 						return a > (b);
 					});
-					console.log('Load from dir', data);
+					console.log('Loading pics from dir');
 					autoCycle();
 					localStorage.BG_PICS = JSON.stringify(BG_PICS);					
 				});
@@ -212,7 +213,9 @@ function initInterface()
 	_nameInput =$('#input-name');
 	_bgUrlDiv = $('#bgUrl');
 	_authorDiv = $('#author');
-
+	_bm_nameDiv = $('#bm-name');
+	_bm_urlDiv = $('#bm-url');
+	_bm_infoDiv = $('#info');
 
 
 	// not in loadData because need wait for dom elements
@@ -412,14 +415,14 @@ function bookmarkEdit_enter(selectedBookmark)
 	//BG_DIV.css('filter', 'blur(5px)');
 	var i = selectedBookmark.attr('data-key');
 	_curI = i;
-	$('#bm-name').val(_bookmarks[i].name);
-	$('#bm-url').val(_bookmarks[i].url);
+	_bm_nameDiv.val(_bookmarks[i].name);
+	_bm_urlDiv.val(_bookmarks[i].url);
 
-	selectedBookmark.append($('#info'))
+	selectedBookmark.append(_bm_infoDiv)
 	selectedBookmark.removeClass('bookmark-scale-down').addClass('bookmark-scale-up')	
 	selectedBookmark.children('.wrap-icon').removeClass('icon-shift-down').addClass('icon-shift-up')	
-	$('#info').slideDown();
-	$('#wrap-content').animate({opacity:0}, 'slow');
+	_bm_infoDiv.slideDown();
+	_contentDiv.animate({opacity:0}, 'slow');
 	
 }
 
@@ -427,8 +430,8 @@ function bookmarkEdit_exit()
 {
 	_sbm.removeClass('bookmark-scale-up').addClass('bookmark-scale-down')
 	_sbm.children('.wrap-icon').removeClass('icon-shift-up').addClass('icon-shift-down')
-	$('#info').slideUp();
-	$('#wrap-content').animate({opacity:1}, 'slow');
+	_bm_infoDiv.slideUp();
+	_contentDiv.animate({opacity:1}, 'slow');
 	_sbm.off('click', false);
 }
 
@@ -442,8 +445,8 @@ $('#bm-cancel').click(function(e)
 
 	bookmarkEdit_exit();
 
-	$('#bm-name').val(_bookmarks[_curI].name);
-	$('#bm-url').val(_bookmarks[_curI].url);
+	_bm_nameDiv.val(_bookmarks[_curI].name);
+	_bm_urlDiv.val(_bookmarks[_curI].url);
 });
 
 
@@ -455,9 +458,9 @@ $('#bm-save').click(function(e)
 
 	bookmarkEdit_exit();
 
-	_sbm.attr('href', $('#bm-url').val());
-	_bookmarks[_curI].name = $('#bm-name').val();
-	_bookmarks[_curI].url = $('#bm-url').val();
+	_sbm.attr('href', _bm_urlDiv.val());
+	_bookmarks[_curI].name = _bm_nameDiv.val();
+	_bookmarks[_curI].url = _bm_urlDiv.val();
 	_bookmarks[_curI].icon = _sbm.find('.icon').attr('src');
 	localStorage.bookmarks = JSON.stringify(_bookmarks)
 });
@@ -487,7 +490,7 @@ $('#bm-url').keypress(function(e)
 	if (e.which === KEYS.enter)
 	{
 		updateIconSrc(_sbm, $(this).val());
-		$('#bm-name').focus();
+		_bm_nameDiv.focus();
 	}
 });
 
