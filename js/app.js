@@ -17,6 +17,12 @@ var KEYS = {
 //TODO: download files
 // for compliments, pictures, settings
 // setting for dock to show up immediatley
+// for next release
+// css cleanup
+// add http/s:// to user entered urls, getdomainname sucks
+// exit edit bug #366
+// pic credits
+// release notes
 
 
 // Helpers
@@ -28,14 +34,29 @@ function getRandomInt(min, max)
 // Fix for JS not doing mod properly on negatives
 Number.prototype.mod = function(n){ return ((this%n)+n)%n; }
 
-// excludes WWW.
-function getDomainName(url)
+// return the last num(level) domains
+function getDomainName(url, level)
 {
-	if(url.search(/^https?\:\/\//) != -1)
-		url = url.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i, '');
-	else
-		url = url.match(/^(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i, '');
-	return url[1];
+	var domains = url.split('.');
+	var d;
+	if (domains.length === 2)
+	{
+		// ['https://domain', 'com']
+		d = [domains[0].split('://')]
+		if (level !== -1)
+			d = d.push(domains[1]);
+	}
+	else if (domains.length >= 3)
+	{
+		// ['http://sub', ...., 'domain', 'com']
+		if (level >= domains.length)
+			level = domains.length - 1;
+		if (level === -1)
+			d = [domains[domains.length - 2]];
+		else
+			d = domains.slice(domains.length-level - 1, domains.length - 1);
+	}
+	return d.join('.');
 }
 
 
@@ -319,7 +340,7 @@ var _curI;
 // searches local icons folder for an icon that matches a given url
 function getIconSrc(url)
 {
-	var domain = getDomainName(url);
+	var domain = getDomainName(url, 1);
 
 	// TODO: look into getting JSON listing of a directory
 	for (var i = 0; i < ICONS.length; i++)
@@ -444,7 +465,7 @@ function getBookmarkIcon(b)
 	{
 		var standardIcon = getIconSrc(b.url);
 		if (!standardIcon)
-			icon = $('<h1>').html(getDomainName(b.url).slice(0,2).toUpperCase());
+			icon = $('<h1>').html(getDomainName(b.url, -1).slice(0,2).toUpperCase());
 		else
 			icon.attr({src: _iconsDir + '/' + standardIcon})
 	}
