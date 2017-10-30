@@ -19,8 +19,7 @@ var KEYS = {
 // setting for dock to show up immediatley
 // for next release
 // css cleanup
-// add http/s:// to user entered urls, getdomainname sucks
-// exit edit bug #366
+// add http/s:// to user entered urls
 // pic credits
 // release notes
 
@@ -351,13 +350,14 @@ function getIconSrc(url)
 	return null;
 }
 
+
+
 function bookmarkEdit_enter(selectedBookmark)
 {
 
 	if (_sbm && selectedBookmark !== _sbm)
 		bookmarkEdit_exit()
-	
-	selectedBookmark.bind('click', false);
+	selectedBookmark.on('click', false);
 	_sbm = selectedBookmark;
 	var url = selectedBookmark.attr('href');
 
@@ -381,13 +381,15 @@ function bookmarkEdit_exit()
 	_sbm.children('.wrap-icon').removeClass('icon-shift-up').addClass('icon-shift-down')
 	$('#info').slideUp();
 	$('#wrap-content').animate({opacity:1}, 'slow');
-	// TODO: bug takes to url of _sbm
-	_sbm.unbind('click');
+	_sbm.off('click', false);
 }
 
 
-$('#bm-cancel').click(function()
+$('#bm-cancel').click(function(e)
 {
+	e.preventDefault();
+	e.stopPropagation();
+
 	updateIconSrc(_sbm, _bookmarks[_curI].url)
 
 	bookmarkEdit_exit();
@@ -398,8 +400,11 @@ $('#bm-cancel').click(function()
 
 
 
-$('#bm-save').click(function()
+$('#bm-save').click(function(e)
 {
+	e.preventDefault();
+	e.stopPropagation();
+
 	bookmarkEdit_exit();
 
 	_sbm.attr('href', $('#bm-url').val());
