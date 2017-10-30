@@ -21,7 +21,6 @@ var KEYS = {
 // css cleanup
 // add http/s:// to user entered urls
 // pic credits
-// release notes
 
 
 // Helpers
@@ -56,6 +55,24 @@ function getDomainName(url, level)
 			d = domains.slice(domains.length-level - 1, domains.length - 1);
 	}
 	return d.join('.');
+}
+
+// returns true if new version, false otherwise
+function checkIfUpdated(){
+
+	var currentVersion = chrome.app.getDetails().version;
+	currentVersion = parseInt(currentVersion.split('.').join(''));
+
+	if (!localStorage.version)
+	{
+		localStorage.version = currentVersion;
+		return true;
+	}
+
+
+	if (parseInt(localStorage.version) < currentVersion)
+		return true;
+	return false;
 }
 
 
@@ -257,6 +274,9 @@ function addListeners()
 loadData();
 $('document').ready(function()
 {
+	if (checkIfUpdated() === true)
+		window.open('livly-release-notes.html', '_blank')
+
 	initInterface();
 	addListeners();
 });
