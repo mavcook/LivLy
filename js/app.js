@@ -22,7 +22,6 @@ var KEYS = {
 // setting for dock to show up immediatley
 // for next release
 // css cleanup
-// add http/s:// to user entered urls
 
 
 // Helpers
@@ -42,7 +41,7 @@ function getDomainName(url, level)
 	if (domains.length === 2)
 	{
 		// ['https://domain', 'com']
-		d = [domains[0].split('://')]
+		d = [domains[0].split('://')[1]]
 		if (level !== -1)
 			d.push(domains[1]);
 	}
@@ -470,14 +469,18 @@ function updateIconSrc(bookmark, newurl)
 	var b = JSON.parse(JSON.stringify(_bookmarks[key])); //copy instead of ref
 	b.url = newurl;
 	b.icon = '';
-	var newIcon = getBookmarkIcon(b)
+	var newIcon = getBookmarkIcon(b);
 
 	bookmark.find('.icon').replaceWith(newIcon);
 }
 
 $('#bm-url').blur(function()
 {
-	updateIconSrc(_sbm, $(this).val())
+	enteredUrl = $(this).val();
+	if (enteredUrl.split('://').length < 2)
+		enteredUrl = 'http://' + enteredUrl;
+	$(this).val(enteredUrl)
+	updateIconSrc(_sbm, enteredUrl)
 });
 $('#bm-url').keypress(function(e)
 {
@@ -513,12 +516,12 @@ function toggleBookmarkDock()
 function getBookmarkIcon(b)
 {
 	var icon = $('<img>', {src: b.icon, class: 'icon'});
-	
+
 	if (!b.icon)
 	{
 		var standardIcon = getIconSrc(b.url);
 		if (!standardIcon)
-			icon = $('<h1>').html(getDomainName(b.url, -1).slice(0,2).toUpperCase());
+			icon = $('<h1 class="icon">').html(getDomainName(b.url, -1).slice(0,2).toUpperCase());
 		else
 			icon.attr({src: _iconsDir + '/' + standardIcon})
 	}
@@ -569,7 +572,14 @@ function createBookmarks(bm)
 
 function updateCredits()
 {
-	var bgName = BG_PICS[localStorage.picIdx].split('/');
+	if (BG_PICS.length === 0)
+		return;
+
+	var i = 0;
+	if (localStorage.picIdx)
+		i = localStorage.picIdx;
+
+	var bgName = BG_PICS[i].split('/');
 	bgName = bgName[bgName.length-1];
 	var info = CREDITS[bgName];
 
