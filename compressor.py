@@ -33,7 +33,10 @@ def getFiles(dirr):
 
 def compressImg(img, filename, quality, outDir, maxwidth, infile):
 
-	outfile = os.path.join(outDir, filename + '_q' + str(quality) + '.jpg')
+	ext = '.webp'
+	if jpegCmp is True:
+		ext = '.jpg'
+	outfile = os.path.join(outDir, filename + '_q' + str(quality) + ext)
 	if os.path.exists(outfile) == True:
 		print('Skipping: already exits ', outfile)
 		return
@@ -57,7 +60,7 @@ def compressImg(img, filename, quality, outDir, maxwidth, infile):
 		img.save(outfile,"JPEG",optimize=True, quality=quality) 
 	else:
 		
-		cmd = ['/home/mav/Documents/projects/chromeExtensions/cwebp', '-m', '6', '-q', str(quality)]
+		cmd = ['cwebp', '-m', '6', '-q', str(quality)]
 		if resize is True:
 			cmd += ['-resize', str(w), str(h)]
 		cmd += [infile, '-o', outfile]
@@ -93,7 +96,7 @@ if __name__ == "__main__":
 
 	# Quick command line arguments
 	parser = argparse.ArgumentParser(description='Quick img compressor and thumbnailer')
-	parser.add_argument('-d', type=str, required=True, help='Input directory. All files in directory will be compressed. Takes priority over -f')
+	parser.add_argument('-i', type=str, required=True, help='Input directory. All files in directory will be compressed. Takes priority over -f')
 	parser.add_argument('-o', '--output', type=str,
 						help='Output directory. A directory will be created called compressed, along with the subfolder thumbs. If not specified, does this in the input directory.')
 	parser.add_argument('-q', '--quality', default=85, type=int, help='Quality of compression, 1-100')
@@ -101,7 +104,7 @@ if __name__ == "__main__":
 	args = parser.parse_args(argv)
 
 	q = args.quality
-	inDir = args.d
+	inDir = args.i
 	outDir = None
 	jpegCmp = args.jpeg
 
