@@ -56,6 +56,14 @@
 		{ "category" : "odd", "text": "You're so cool, I would make you dinner...if I had arms." },
 		{ "category" : "motivational comfort", "text": "Your voice matters." },
 		{ "category" : "odd funny", "text": "When we aren't talking, I am hosting your fan club meetings." },
-		{ "category" : "comfort", "text": "I'm here with you." }
+		{ "category" : "comfort", "text": "I'm here with you." },
+		{ "category" : "general", "text": "Happy to see you again!" },
+		{ "category" : "general", "text": "I missed you." },
+		{ "category" : "motivational competence", "text": "Keep up the hard work!" },
+		{ "category" : "general", "text": "It is a pleasure to see you smile." },
+		{ "category" : "general", "text": "My friends keep talking about how excellent you are." },
+		{ "category" : "general", "text": "Could you be less awesome?" },
+		{ "category" : "general personality", "text": "Even our briefest reunions leave me starstruck." },
+		{ "category" : "odd", "text": "I tried calculating your perfection, but I got stuck in an infinite sum." }
 	]
 }
