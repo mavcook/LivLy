@@ -411,7 +411,7 @@ $('#bm-save').click(function(e)
 	_bookmarks[_curI].name = $('#bm-name').val();
 	_bookmarks[_curI].url = $('#bm-url').val();
 	_bookmarks[_curI].icon = _sbm.find('.icon').attr('src');
-	localStorage.bookmarks = JSON.stringify({'bookmarks': _bookmarks})
+	localStorage.bookmarks = JSON.stringify(_bookmarks)
 });
 
 // updates the icon for a given $('.bookmark') el
@@ -463,8 +463,7 @@ function toggleBookmarkDock()
 // Returns icon source img or html to replace img
 function getBookmarkIcon(b)
 {
-	var icon = $('<img>', {src: b.icon});
-	icon.attr('class', 'icon');
+	var icon = $('<img>', {src: b.icon, class: 'icon'});
 	
 	if (!b.icon)
 	{
