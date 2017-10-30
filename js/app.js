@@ -1,17 +1,20 @@
 var BG_PICS = [];
 var ICONS = [];
 var COMPLIMENTS;
+var CREDITS;
 var BG_DIV = document.getElementById('bg');
 var _iconsDir = 'icons';
 var _bgDir = 'bg';
 var _complimentDiv, _nameInputDiv, _contentDiv, _nameSpan, _nameSpan;
+var _bgUrlDiv, _authorDiv;
 var _bookmarks = {};
 
 // oversized images cause slow load when creating a new tab
 var BG_RES = [1366, 1600, 1920, 2560];//, 3840, 5120];
 var KEYS = {
 	space: 32,
-	enter: 13
+	enter: 13,
+	i: 105
 };
 
 //TODO: download files
@@ -20,7 +23,6 @@ var KEYS = {
 // for next release
 // css cleanup
 // add http/s:// to user entered urls
-// pic credits
 
 
 // Helpers
@@ -58,7 +60,8 @@ function getDomainName(url, level)
 }
 
 // returns true if new version, false otherwise
-function checkIfUpdated(){
+function checkIfUpdated()
+{
 
 	var currentVersion = chrome.app.getDetails().version;
 	currentVersion = parseInt(currentVersion.split('.').join(''));
@@ -139,6 +142,17 @@ function loadData()
 	});
 
 
+	if (!localStorage.credits){
+		loadJSON('credits.json', function(json){ 
+			localStorage.credits = JSON.stringify(json.credits);
+			CREDITS = json.credits;
+		});
+		console.log('loading credits from file')
+	}
+	else
+		CREDITS = JSON.parse(localStorage.credits);
+
+
 	if (!localStorage.compliments)
 	{
 		loadJSON('compliments.json', function(json){ 
@@ -197,6 +211,8 @@ function initInterface()
 	_contentDiv = $('#wrap-content');
 	_nameSpan = $('#name');
 	_nameInput =$('#input-name');
+	_bgUrlDiv = $('#bgUrl');
+	_authorDiv = $('#author');
 
 
 
@@ -214,13 +230,13 @@ function initInterface()
 	
 
 	_contentDiv.fadeIn(1200, function(){$('.shade').fadeIn(1000)});
-	
+	updateCredits();
 }
 
 function addListeners()
 {
-	$('#nextPic').click(function(){ changePic(1) });
-	$('#prevPic').click(function(){ changePic(-1) });
+	$('#nextPic').click(function(){ changePic(1); updateCredits(); });
+	$('#prevPic').click(function(){ changePic(-1); updateCredits(); });
 	
 
 	_nameSpan.dblclick(function(){
@@ -257,12 +273,20 @@ function addListeners()
 	});
 
 	// Only toggle dock when name isn't being changed
-	document.onkeypress = function (e) {
+	document.onkeypress = function(e){
 		e = e || window.event;
-		if (e.keyCode === KEYS.space && _nameInputDiv.is(':visible') === false)
-			toggleBookmarkDock();
+
+		if ($(':focus').prop('nodeName') !== 'INPUT')
+		{
+			if (e.keyCode === KEYS.space)
+				toggleBookmarkDock();
+			else if (e.keyCode === KEYS.i)
+				$('#wrap-credits').fadeToggle();
+		}
+		
 		// TODO: switch and shortcuts 1->goto first bookmark
 	};
+
 }
 
 
@@ -275,7 +299,12 @@ loadData();
 $('document').ready(function()
 {
 	if (checkIfUpdated() === true)
-		window.open('livly-release-notes.html', '_blank')
+	{
+		window.open('livly-release-notes.html', '_blank');
+		localStorage.removeItem('BG_PICS');
+		localStorage.removeItem('credits');
+		localStorage.removeItem('compliments');
+	}
 
 	initInterface();
 	addListeners();
@@ -537,3 +566,14 @@ function createBookmarks(bm)
 
 
 // ######## SETTINGS ##########################################################################################
+
+function updateCredits()
+{
+	var bgName = BG_PICS[localStorage.picIdx].split('/');
+	bgName = bgName[bgName.length-1];
+	var info = CREDITS[bgName];
+
+	_bgUrlDiv.attr('href', info.imgUrl);
+	_authorDiv.attr('href', info.authorUrl);
+	_authorDiv.html(info.author);
+}
