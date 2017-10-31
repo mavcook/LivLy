@@ -38,5 +38,5 @@ for f in jsFiles:
 #sp.call(['google-chrome', '--pack-extension="../Livly"', '--pack-extension-key="../LivLy.pem"'])
 
 shutil.copy('../LivLy.pem', os.path.join(outDir, 'key.pem'))
-sp.call(['zip', '-r', '../livly.zip', outDir])
+shutil.make_archive('../livly', 'zip', outDir)
 os.remove('../LivLy/key.pem')

@@ -173,7 +173,7 @@ function loadData()
 		localStorage.lastDay = new Date().getDate();
 
 
-	if (!localStorage.bookmarks)
+	if (!localStorage.bookmarks || localStorage.bookmarks === 'undefined')
 		loadJSON('bookmarks.json', function(json){
 			console.log('loading bookmarks from file');
 			_bookmarks = json.bookmarks;
@@ -311,6 +311,7 @@ $('document').ready(function()
 		localStorage.removeItem('credits');
 		localStorage.removeItem('compliments');
 		localStorage.version = getVersion();
+		loadData();
 	}
 
 	initInterface();
