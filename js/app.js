@@ -11,7 +11,8 @@ var _bookmarks = {};
 var _bm_nameDiv, _bm_urlDiv, _bm_infoDiv;
 
 // oversized images cause slow load when creating a new tab
-var BG_RES = [1366, 1600, 1920, 2560];//, 3840, 5120];
+//, 3840, 5120]
+var BG_RES = [1366, 1600, 1920, 2560]; 
 var KEYS = {
 	space: 32,
 	enter: 13,
@@ -30,7 +31,7 @@ function getRandomInt(min, max)
 }
 
 // Fix for JS not doing mod properly on negatives
-Number.prototype.mod = function(n){ return ((this%n)+n)%n; }
+Number.prototype.mod = function(n){ return ((this%n)+n)%n; };
 
 // return the last num(level) domains
 function getDomainName(url, level)
@@ -40,7 +41,7 @@ function getDomainName(url, level)
 	if (domains.length === 2)
 	{
 		// ['https://domain', 'com']
-		d = [domains[0].split('://')[1]]
+		d = [domains[0].split('://')[1]];
 		if (level !== -1)
 			d.push(domains[1]);
 	}
@@ -57,12 +58,16 @@ function getDomainName(url, level)
 	return d.join('.');
 }
 
+function getVersion()
+{
+	var currentVersion = chrome.app.getDetails().version;
+	return parseInt(currentVersion.split('.').join(''));
+}
 // returns true if new version, false otherwise
 function checkIfUpdated()
 {
 
-	var currentVersion = chrome.app.getDetails().version;
-	currentVersion = parseInt(currentVersion.split('.').join(''));
+	var currentVersion = getVersion();
 
 	if (!localStorage.version)
 	{
@@ -145,7 +150,7 @@ function loadData()
 			localStorage.credits = JSON.stringify(json.credits);
 			CREDITS = json.credits;
 		});
-		console.log('loading credits from file')
+		console.log('loading credits from file');
 	}
 	else
 		CREDITS = JSON.parse(localStorage.credits);
@@ -170,7 +175,7 @@ function loadData()
 
 	if (!localStorage.bookmarks)
 		loadJSON('bookmarks.json', function(json){
-			console.log('loading bookmarks from file')
+			console.log('loading bookmarks from file');
 			_bookmarks = json.bookmarks;
 			localStorage.bookmarks = JSON.stringify(_bookmarks);
 			createBookmarks(_bookmarks);
@@ -229,7 +234,7 @@ function initInterface()
 		createBookmarks(_bookmarks);
 	
 
-	_contentDiv.fadeIn(1200, function(){$('.shade').fadeIn(1000)});
+	_contentDiv.fadeIn(1200, function(){$('.shade').fadeIn(1000);});
 	updateCredits();
 }
 
@@ -247,7 +252,8 @@ function addListeners()
 		if (e.which === KEYS.enter)
 		{
 			var input = _nameInput.val();
-			if (!input.replace(/\s/g, '').length) //just whitespace
+			if (!input.replace(/\s/g, '').length)
+				// just whitespace
 				return;
 			localStorage.setItem('name', input);
 			_nameSpan.html(input);
@@ -304,6 +310,7 @@ $('document').ready(function()
 		localStorage.removeItem('BG_PICS');
 		localStorage.removeItem('credits');
 		localStorage.removeItem('compliments');
+		localStorage.version = getVersion();
 	}
 
 	initInterface();
@@ -343,7 +350,8 @@ function autoCycle()
 	var lastDay = parseInt(localStorage.lastDay);
 	var currentDay = new Date().getDate();
 
-	if (currentDay != lastDay || !localStorage.BG_PICS) // will be incorrect if loaded on same day of past month, 
+	if (currentDay != lastDay || !localStorage.BG_PICS) 
+	// will be incorrect if loaded on same day of past month, 
 	// but that is only 1 failure/mo which is acceptable
 	{
 		console.log('New day, new pic. Enjoy');
@@ -382,7 +390,8 @@ function changePic(increment)
 
 // ######## BOOKMARKS ##########################################################################################
 
-var _sbm; //current selected bookmark for editing
+//current selected bookmark for editing
+var _sbm; 
 var _curI;
 
 // searches local icons folder for an icon that matches a given url
@@ -405,7 +414,7 @@ function bookmarkEdit_enter(selectedBookmark)
 {
 
 	if (_sbm && selectedBookmark !== _sbm)
-		bookmarkEdit_exit()
+		bookmarkEdit_exit();
 	selectedBookmark.on('click', false);
 	_sbm = selectedBookmark;
 	var url = selectedBookmark.attr('href');
@@ -416,9 +425,9 @@ function bookmarkEdit_enter(selectedBookmark)
 	_bm_nameDiv.val(_bookmarks[i].name);
 	_bm_urlDiv.val(_bookmarks[i].url);
 
-	selectedBookmark.append(_bm_infoDiv)
-	selectedBookmark.removeClass('bookmark-scale-down').addClass('bookmark-scale-up')	
-	selectedBookmark.children('.wrap-icon').removeClass('icon-shift-down').addClass('icon-shift-up')	
+	selectedBookmark.append(_bm_infoDiv);
+	selectedBookmark.removeClass('bookmark-scale-down').addClass('bookmark-scale-up');
+	selectedBookmark.children('.wrap-icon').removeClass('icon-shift-down').addClass('icon-shift-up');
 	_bm_infoDiv.slideDown();
 	_contentDiv.animate({opacity:0}, 'slow');
 	
@@ -426,8 +435,8 @@ function bookmarkEdit_enter(selectedBookmark)
 
 function bookmarkEdit_exit()
 {
-	_sbm.removeClass('bookmark-scale-up').addClass('bookmark-scale-down')
-	_sbm.children('.wrap-icon').removeClass('icon-shift-up').addClass('icon-shift-down')
+	_sbm.removeClass('bookmark-scale-up').addClass('bookmark-scale-down');
+	_sbm.children('.wrap-icon').removeClass('icon-shift-up').addClass('icon-shift-down');
 	_bm_infoDiv.slideUp();
 	_contentDiv.animate({opacity:1}, 'slow');
 	_sbm.off('click', false);
@@ -439,7 +448,7 @@ $('#bm-cancel').click(function(e)
 	e.preventDefault();
 	e.stopPropagation();
 
-	updateIconSrc(_sbm, _bookmarks[_curI].url)
+	updateIconSrc(_sbm, _bookmarks[_curI].url);
 
 	bookmarkEdit_exit();
 
@@ -460,14 +469,15 @@ $('#bm-save').click(function(e)
 	_bookmarks[_curI].name = _bm_nameDiv.val();
 	_bookmarks[_curI].url = _bm_urlDiv.val();
 	_bookmarks[_curI].icon = _sbm.find('.icon').attr('src');
-	localStorage.bookmarks = JSON.stringify(_bookmarks)
+	localStorage.bookmarks = JSON.stringify(_bookmarks);
 });
 
 // updates the icon for a given $('.bookmark') el
 function updateIconSrc(bookmark, newurl)
 {
 	var key = bookmark.attr('data-key');
-	var b = JSON.parse(JSON.stringify(_bookmarks[key])); //copy instead of ref
+	//copy instead of ref
+	var b = JSON.parse(JSON.stringify(_bookmarks[key])); 
 	b.url = newurl;
 	b.icon = '';
 	var newIcon = getBookmarkIcon(b);
@@ -480,8 +490,8 @@ $('#bm-url').blur(function()
 	enteredUrl = $(this).val();
 	if (enteredUrl.split('://').length < 2)
 		enteredUrl = 'http://' + enteredUrl;
-	$(this).val(enteredUrl)
-	updateIconSrc(_sbm, enteredUrl)
+	$(this).val(enteredUrl);
+	updateIconSrc(_sbm, enteredUrl);
 });
 $('#bm-url').keypress(function(e)
 {
@@ -502,9 +512,10 @@ function toggleBookmarkDock()
 		wrap_bookmarks.fadeOut();
 	else
 	{
-		$('.wrap-icon').removeClass('icon-shift-down')
-		$('.bookmark').removeClass('bookmark-scale-down')
-		wrap_bookmarks.css('display', 'flex').hide(); //hack for flexy
+		$('.wrap-icon').removeClass('icon-shift-down');
+		$('.bookmark').removeClass('bookmark-scale-down');
+		//hack for flexy
+		wrap_bookmarks.css('display', 'flex').hide(); 
 		wrap_bookmarks.css({'-webkit-animation': 'top90_to_68 .7s ease forwards'});
 		/* TODO: allow overflow so multiple rows of bookmarks can scroll */
 		wrap_bookmarks.fadeIn();
@@ -524,7 +535,7 @@ function getBookmarkIcon(b)
 		if (!standardIcon)
 			icon = $('<h1 class="icon">').html(getDomainName(b.url, -1).slice(0,2).toUpperCase());
 		else
-			icon.attr({src: _iconsDir + '/' + standardIcon})
+			icon.attr({src: _iconsDir + '/' + standardIcon});
 	}
 	return icon;
 }
@@ -539,10 +550,10 @@ function createBookmarks(bm)
 		var link = $('<a>', {href: bm[key].url, class: 'bookmark'});
 		link.attr('data-key', key);
 		
-		var icon = getBookmarkIcon(bm[key])
+		var icon = getBookmarkIcon(bm[key]);
 
 		// save icon srcs for those that aren't defined
-		bm[key].icon = icon.attr('src')
+		bm[key].icon = icon.attr('src');
 
 		var iconWrap = $('<div class="wrap-icon">');
 
