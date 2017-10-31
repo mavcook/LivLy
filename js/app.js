@@ -21,8 +21,6 @@ var KEYS = {
 //TODO: download files
 // for compliments, pictures, settings
 // setting for dock to show up immediatley
-// for next release
-// css cleanup
 
 
 // Helpers

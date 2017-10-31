@@ -1,10 +1,9 @@
-@font-face
-{
+@font-face {
 	font-family: 'L_Cursive';
 	src: url('/fonts/HaloHandletter.woff') format('woff');
 }
-@font-face
-{
+
+@font-face {
 	font-family: 'L_Sans';
 	src: url('/fonts/Montserrat-Regular.woff') format('woff');
 }
@@ -21,19 +20,18 @@ html, body {
 	position: absolute;
 	margin: 0;
 	color: #fff;
-	overflow:hidden; /* TODO: allow overflow so multiple rows of bookmarks can scroll */
+	overflow: hidden; /* TODO: allow overflow so multiple rows of bookmarks can scroll */
 	font-family: 'L_Sans';
 	user-select: none;
 	cursor: default;
 }
+
 body {
 	display: flex;
 	justify-content: center;
 }
 
-
-#bg
-{
+#bg {
 	position: absolute;
 	height: 100%;
 	width: 100%;
@@ -44,35 +42,23 @@ body {
 	transition: background .3s linear; 
 	will-change: opacity; /*idk if this actually helps*/
 }
-.fadein { animation: fadein 1s ease-out forwards;	}
-
-@keyframes fadein 
-{
-    from { opacity: 0; }
-    to { opacity: 1;}			
-}
-
 
 #greeting { 
 	font-family: 'L_Cursive';
 	font-size: 715%;
 	font-weight:normal;
 	word-spacing: 10px;
-	margin-bottom: 0;
-	margin-top: 0;
+	margin: 0;
 	position: relative;
 	z-index: 1;
 }
 
-#name
-{
-	cursor:pointer;
+#name {
+	cursor: pointer;
 	transition: .3s;
 }
 
-
-#compliment 
-{
+#compliment {
 	font-size: 225%;
 	word-spacing: 4px;
 	margin-top: 0;
@@ -80,35 +66,30 @@ body {
 	z-index: 1;
 }
 
-.shade
-{
+.shade {
 	height: 110%;
 	background-color: rgba(53, 53, 53, 0.3);
 	width: 100%;
 	position: absolute;
 	top: 0;
-	z-index: 0;
 	filter: blur(70px);
 	z-index: 0;
-	display:none;
+	display: none;
 }
 
+#wrap-welcome { position: relative; }
 
-#wrap-welcome{position:relative;}
-
-#wrap-content
-{
-	display:none;
+#wrap-content {
+	display: none;
 	position: absolute;
 	width: 800px;
 	top: 43%;
 
 	text-align: center;
 	will-change: top;
-	/*opacity: 0;*/
 }
-#wrap-input-name
-{
+
+#wrap-input-name {
 	display: none;
 
 	background-color: rgba(53,53,53,.2);
@@ -125,12 +106,10 @@ body {
 	text-shadow: 0 0 6px rgb(152, 152, 152);
 }
 
-input[type=text]
-{
+input[type=text] {
 	background-color: rgba(53, 53, 53, 0.0);
 	border: none;
 	border-bottom: 2px solid rgba(255,255,255,.8);
-	/* padding: 20px; */
 	width: 100%;
 	font-size: 38px;
 	color: white;
@@ -138,8 +117,7 @@ input[type=text]
 	outline: none;
 }
 
-.itr
-{
+.itr {
 	min-width: 75px;
 	max-width: 150px;
 	width: 15%;
@@ -151,14 +129,16 @@ input[type=text]
 	transition: .3s;
 	z-index: 1;
 }
-.itr:hover
-{
+
+.itr:hover {
 	background-color: rgba(255,255,255,.1);
 }
+
 #nextPic { right: 0;}
+
 #prevPic { left: 0;}
 
-#wrap-bookmarks{
+#wrap-bookmarks {
 	width: 100%;
 	top: 68%;
 	position: relative;
@@ -168,38 +148,29 @@ input[type=text]
 	justify-content: center;
 }
 
-.bookmark
-{
+.bookmark {
 	position: relative;
 	width: 140px;
 	height: 140px;
 	
 	border: 1px solid #fff;
 	margin: 10px;
-	display: inline-block;
-	background-color: rgba(255,255,255,0);
 	transition: .3s;
 
-	text-align: center;
-	/* line-height: 130px; center letter vertically */
-	vertical-align: top;
-
-	text-decoration: none;
 	color: inherit;
 }
-.bookmark:hover{
+.bookmark:hover {
 	background-color: rgba(255,255,255,.1);
 }
-.bookmark h1
-{
+
+.bookmark h1 {
 	font-size: 300%;
 	margin: 0;
 	margin-top: 5px;
 	line-height: initial;
 }
 
-.wrap-icon
-{
+.wrap-icon {
 	width: 42%;
 	top: 29%;
 	left: 29%;
@@ -208,14 +179,13 @@ input[type=text]
 	will-change: width;
 	will-change: left;
 }
-.wrap-icon img{
+
+.wrap-icon img {
 	width: 100%;
 	height: auto;
 }
 
-
-#bookmark_launcher
-{
+#bookmark_launcher {
 	position: fixed;
 	bottom: 0;
 	width: 50px;
@@ -226,49 +196,32 @@ input[type=text]
 }
 
 svg path {transition: .3s;}
-#bookmark_launcher:hover > svg path
-{
+
+#bookmark_launcher:hover > svg path {
 	stroke: rgb(255,255,255);
 }
-.shade.small 
-{
+
+.shade.small {
 	filter: blur(20px);
 	left: 0;
 	z-index: -1;
 }
 
-@-webkit-keyframes top10 {
-	100%  { top: 10%;}
-}
-@-webkit-keyframes top10_to_45 {
-	0% { top: 10%;}
-	100%  { top: 43%;}
-}
-@-webkit-keyframes top90_to_68 {
-	0% { top: 90%;}
-	100%  { top: 68%;}
-}
-
-@-webkit-keyframes fadeIn {
-	0% { opacity: 0;}
-	100%  { opacitiy: 1;}
-}
-
-
-#info
-{
+#info {
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: rgba(130, 130, 158, 0.4);
-	display: none;
-	/* width: 130px; */
+
 	width: calc(100% - 20px);
 	height: calc(100% - 20px);
 	padding: 10px;
+
+	background: rgba(130, 130, 158, 0.4);
+	display: none;
 	font-weight: bold;
 	text-shadow: 1px 1px 10px black;
 }
+
 .input-small {
 	font-size: 1.2em !important;
 	display: block;
@@ -277,9 +230,14 @@ svg path {transition: .3s;}
 	text-shadow: 1px 1px 10px black;
 	margin-bottom: 16px;
 	border-bottom: 1px solid rgba(255,255,255,.8) !important;
-	
 }
-#info label {line-height: initial; margin-top: 0.6em; margin-bottom: 0;display: block;}
+
+#info label {
+	line-height: initial; 
+	margin-top: 0.6em; 
+	margin-bottom: 0;
+	display: block;
+}
 
 button {
 	margin: 0 auto;
@@ -292,21 +250,85 @@ button {
 	cursor: pointer;
 	display: block;
 }
+
 button:hover{
 	border: 2px solid rgba(255,255,255,1);
 	background-color: rgba(255,255,255,.4);	
 	letter-spacing: 2px;
 }
+
 #bm-save{
 	float: left;
 	margin: 0;
 	margin-left: 5%;
 	width: 65%;
 }
+
 #bm-cancel{
 	width: 25%;
 	margin: 0;
 	border-left: none;
+}
+
+#wrap-credits{
+	position: absolute;
+	top: 25px;
+	padding: 10px 30px;
+	text-align: center;
+	display: none;
+	box-shadow: inset 0 0 8px 1px;
+}
+
+#wrap-credits a { color: white; }
+
+
+/* ### ANIMATIONS ############################################## */
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1;}			
+}
+
+@-webkit-keyframes top10 {
+	100%  { top: 10%;}
+}
+
+@-webkit-keyframes top10_to_45 {
+	0% { top: 10%;}
+	100%  { top: 43%;}
+}
+
+@-webkit-keyframes top90_to_68 {
+	0% { top: 90%;}
+	100%  { top: 68%;}
+}
+
+@-webkit-keyframes fadeIn {
+	0% { opacity: 0;}
+	100%  { opacity: 1;}
+}
+
+@-webkit-keyframes scaleUpBox {
+	0%  { 
+		width: 140px;
+		height: 140px;
+	}
+	100%  {
+		width: 180px;
+		height: 180px;
+	}
+}
+
+/* Cant get animation-direction: reverse to work */
+@-webkit-keyframes scaleDownBox {
+	0%  {
+		width: 180px;
+		height: 180px;
+	}
+	100%  { 
+		width: 140px;
+		height: 140px;
+	}
 }
 
 @-webkit-keyframes iconUp {
@@ -333,30 +355,7 @@ button:hover{
 	}
 }
 
-
-@-webkit-keyframes scaleUpBox {
-	0%  { 
-		width: 140px;
-		height: 140px;
-	}
-	100%  {
-		width: 180px;
-		height: 180px;
-	}
-}
-
-/* Cant get animation-direction: reverse to work */
-@-webkit-keyframes scaleDownBox {
-	0%  {
-		width: 180px;
-		height: 180px;
-	}
-	100%  { 
-		width: 140px;
-		height: 140px;
-	}
-}
-
+.fadein { animation: fadein 1s ease-out forwards;	}
 
 .bookmark-scale-up {
 	animation: scaleUpBox 1.2s ease forwards;
@@ -370,14 +369,3 @@ button:hover{
 .icon-shift-down {
 	animation: iconDown 1.2s ease forwards;
 }
-
-
-#wrap-credits{
-	position: absolute;
-	top: 25px;
-	padding: 10px 30px;
-	text-align: center;
-	display: none;
-	box-shadow: inset 0 0 8px 1px;
-}
-#wrap-credits a { color: white; }
