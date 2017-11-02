@@ -115,16 +115,18 @@ function loadData()
 		{
 			if (BG_RES[i] >= screenWidth)
 			{
-				_bgDir += '/' + BG_RES[i];
-				getFiles(_bgDir, function(data){
+				var selectedDir = _bgDir + '/' + BG_RES[i];
+				getFiles(selectedDir, function(data){
 					// create full path
 					for (var j = 0; j < data.length; ++j)
-						data[j] = _bgDir + '/' + data[j];
+						data[j] = selectedDir + '/' + data[j];
+
 					BG_PICS = data.sort(function(a,b){
 						a = a.substr(a.length - 10, a.length - 5);
 						b = a.substr(b.length - 10, b.length - 5);
 						return a > (b);
 					});
+
 					console.log('Loading pics from dir');
 					autoCycle();
 					localStorage.BG_PICS = JSON.stringify(BG_PICS);					
