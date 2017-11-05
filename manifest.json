@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "LivLy",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"description": "A non-distracting, minimalist New Tab page.",
 
 	"icons": { 
