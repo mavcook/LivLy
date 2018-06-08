@@ -43,6 +43,30 @@ body {
 	will-change: opacity; /*idk if this actually helps*/
 }
 
+#wrap-toolbar {
+	position: absolute;
+	margin: 30px auto;
+	font-size: 1.3em;
+	display: none;
+}
+
+#wrap-toolbar a { color: #fff; }
+
+#toolbar {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 30px;
+}
+
+#toolbar span {
+	padding: 0 30px;
+	border-right: 1px solid;
+}
+
+#toolbar span:last-child {
+	border-right: none;
+}
+
 #greeting { 
 	font-family: 'L_Cursive';
 	font-size: 715%;
@@ -159,6 +183,7 @@ input[type=text] {
 
 	color: inherit;
 }
+
 .bookmark:hover {
 	background-color: rgba(255,255,255,.1);
 }
@@ -185,9 +210,8 @@ input[type=text] {
 	height: auto;
 }
 
-#bookmark_launcher {
+.launcher {
 	position: fixed;
-	bottom: 0;
 	width: 50px;
 	left: calc(50% - (90px / 2));
 	padding: 10px 20px;
@@ -195,9 +219,21 @@ input[type=text] {
 	display:none;
 }
 
+#bookmark_launcher { bottom: 0; }
+
+#toolbar_launcher {
+	transform: scaleY(-1);
+	top: 0;
+}
+
+#toolbar_launcher svg {
+	width: 35px;
+    padding-left: 8px;
+}
+
 svg path {transition: .3s;}
 
-#bookmark_launcher:hover > svg path {
+.launcher:hover > svg path {
 	stroke: rgb(255,255,255);
 }
 
@@ -279,8 +315,33 @@ button:hover{
 	box-shadow: inset 0 0 8px 1px;
 }
 
-#wrap-credits a { color: white; }
+#wrap-settings {
+	display: none;
+	position: relative;
+	font-size: 1.1em;
+	color: gray;
+	background-color: #fff;
+	/* box-shadow: inset 1px 1px 2px 0px; */
+	padding: 30px;
+}
 
+/* ### BOX SHADOW ############################################## */
+.box-inside-top {
+	position: relative;
+	overflow: hidden;
+}
+
+.box-inside-top:before {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	width: 96%;
+	top: -10px;
+	height: 10px;
+	left: 2%;
+	border-radius: 100px / 5px;
+	box-shadow:0 0 18px rgba(0,0,0,0.6);
+}
 
 /* ### ANIMATIONS ############################################## */
 

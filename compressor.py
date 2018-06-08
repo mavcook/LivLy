@@ -46,7 +46,7 @@ def compressImg(img, filename, quality, outDir, maxwidth, infile):
 	resize = False
 	if w > maxwidth:
 		w = maxwidth
-		h = w * (1/sf)
+		h = w * (1.0/sf)
 		resize = True
 	elif w < maxwidth:
 		print('Img: ', filename, ' too small at: ', img.size, ' needed size: ', maxwidth)

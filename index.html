@@ -10,7 +10,28 @@
 <body>
 	<div id="bg"></div>
 	
-	
+
+	<div id="toolbar_launcher" class="launcher">
+		<svg height="32.8%" viewBox="0 0 74.6 24.5"><path fill="none" stroke="rgba(255,255,255,.5)" stroke-width="3" stroke-miterlimit="10" d="M70 22L37.4 2.5 4.6 21.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+		<div class="shade small"></div>
+	</div>
+
+	<div id="wrap-toolbar">
+		
+		<div id="toolbar">
+			<span id="settings-btn">Settings</span>
+			<span>
+				<a href="" id="bgUrl" target="_blank">Photo</a> by <a href="" id="author" target="_blank"></a>
+			</span>
+			<span>Load</span>			
+		</div>
+
+		<div id="wrap-settings" class="box-inside-top">
+			<input type="checkbox"> Show bookmarks on load
+		</div>
+
+	</div>
+
 	<div id="wrap-content">
 		<div id="wrap-welcome" class="wrap-center">
 			<h1 id="greeting">Hi <span id="name">_____</span></h1>
@@ -39,7 +60,7 @@
 		</div>
 	</div>
 
-	<div id="bookmark_launcher">
+	<div id="bookmark_launcher" class="launcher">
 		<svg height="32.8%" viewBox="0 0 74.6 24.5"><path fill="none" stroke="rgba(255,255,255,.5)" stroke-width="3" stroke-miterlimit="10" d="M70 22L37.4 2.5 4.6 21.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
 		<div class="shade small"></div>
 	</div>
@@ -47,10 +68,7 @@
 	<div id="prevPic" class="itr"></div>
 	<div id="nextPic" class="itr"></div>
 
-	<div id="wrap-credits">
-		<a href="" id="bgUrl" target="_blank">Photo</a> by <a href="" id="author" target="_blank"></a>
-	</div>
-
+	
 	
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/app.js"></script>

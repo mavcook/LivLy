@@ -280,6 +280,10 @@ function addListeners()
 		toggleBookmarkDock();
 	});
 
+	$('#toolbar_launcher').click(function(){
+		$('#wrap-toolbar').fadeToggle();
+	});
+
 	// Only toggle dock when name isn't being changed
 	document.onkeypress = function(e){
 		e = e || window.event;
@@ -565,7 +569,7 @@ function createBookmarks(bm)
 		wrap_bookmarks.append(link);
 	}
 	
-	$('#bookmark_launcher').fadeIn(1000);
+	$('.launcher').fadeIn(1000);
 
 	localStorage.bookmarks = JSON.stringify(bm);
 	_bookmarks = bm;
@@ -584,6 +588,8 @@ function createBookmarks(bm)
 
 
 // ######## SETTINGS ##########################################################################################
+
+$('#settings-btn').click(function(){ $('#wrap-settings').slideToggle(); });
 
 function updateCredits()
 {
