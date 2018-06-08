@@ -81,7 +81,16 @@
 		{ "category" : "interpersonal", "text": "You make others happy." },
 		{ "category" : "competence", "text": "I know you can do it." },
 		{ "category" : "aesthetic", "text": "Your smile is incredible!" },
-		{ "category" : "lovey", "text": "I made this for you: <3" },
-		{ "category" : "interpersonal personality", "text": "Spending time with you is so much fun!" }
+		{ "category" : "lovey", "text": "I made this heart for you: <3" },
+		{ "category" : "interpersonal personality", "text": "Spending time with you is so much fun!" },
+		{ "category" : "general", "text": "Being around you makes me feel safe." },
+		{ "category" : "personality", "text": "I love your jokes." },
+		{ "category" : "personality", "text": "You've got too much charm." },
+		{ "category" : "personality", "text": "I'm liking your charisma levels." },
+		{ "category" : "general", "text": "I like how we can just enjoy each other's presence." },
+		{ "category" : "interpersonal competence", "text": "Your support is invaluable." },
+		{ "category" : "general", "text": "Talking to you always makes me feel better." },
+		{ "category" : "general", "text": "It is hard to be away from you." },
+		{ "category" : "general", "text": "The day is great because you are here!" }
 	]
 }

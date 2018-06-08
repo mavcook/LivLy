@@ -1,0 +1,16 @@
+body{
+    color: #585858;
+    font-size: .8em;
+}
+
+#bg {
+    opacity: 1;
+    background-image: url("../bg/2560/ales-krivec-344642_q90.webp");
+    transition: none;
+}
+
+#content {
+    z-index: 1;
+    background-color: #ffffffd6;
+    padding: 50px 100px 0 100px;
+}

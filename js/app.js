@@ -72,7 +72,7 @@ function checkIfUpdated()
 	if (!localStorage.version)
 	{
 		localStorage.version = currentVersion;
-		return true;
+		return false;
 	}
 
 
@@ -293,7 +293,7 @@ function addListeners()
 			if (e.keyCode === KEYS.space)
 				toggleBookmarkDock();
 			else if (e.keyCode === KEYS.i)
-				$('#wrap-credits').fadeToggle();
+				$('#wrap-toolbar').fadeToggle();
 		}
 		
 		// TODO: switch and shortcuts 1->goto first bookmark
