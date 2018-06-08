@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-	"name": "LivLy",
+	"name": "Livly",
 	"version": "0.2.4",
 	"description": "A non-distracting, minimalist New Tab page.",
 
@@ -10,7 +10,7 @@
 	},
 
 	"browser_action": {
-		"default_title": "LivLy"
+		"default_title": "Livly"
 	},
 	"chrome_url_overrides": {
 		"newtab": "index.html"
@@ -18,7 +18,7 @@
 	
 	"offline_enabled": true,
 	"permissions": [ "unlimitedStorage" ],
-	"short_name": "LivLy",
+	"short_name": "Livly",
 	"update_url": "https://clients2.google.com/service/update2/crx",
 	
 	"background": {

@@ -1,6 +1,5 @@
-# LivLy
-A Google Chrome extension created and designed for the one and only Olivia.
-LivLy is a non-distracting and useful New Tab page for Google Chrome, providing shortcuts to your favorite webpages, with a new, beautiful background every day.
+# Livly
+Livly is a non-distracting and useful New Tab page for Google Chrome, providing shortcuts to your favorite webpages, with a new, beautiful background every day.
 
 If you don't like the picture of the day, just cycle through the images until you find one you like.
 
@@ -49,11 +48,11 @@ I use public domain images for the backgrounds, however I would still like to ha
 # Upcoming
 To see new features and bug fixes in the work, or to make requests, go here:
 
-[Issues](https://github.com/mavcook/LivLy/issues?utf8=%E2%9C%93&q=is%3Aopen%20is%3Aissue%20-label%3Abug%20-label%3Aduplicate%20-label%3A%22help%20wanted%22%20-label%3Aquestion%20-label%3Awontfix)
+[Issues](https://github.com/mavcook/Livly/issues?utf8=%E2%9C%93&q=is%3Aopen%20is%3Aissue%20-label%3Abug%20-label%3Aduplicate%20-label%3A%22help%20wanted%22%20-label%3Aquestion%20-label%3Awontfix)
 
 
 # Support
-LivLy will always be free. There won't be a pro-version, or any paid version like that. So if you like LivLy and wish to support futher development, or support feeding my stomach, you can make a donation using the links below:
+Livly will always be free. There won't be a pro-version, or any paid version like that. So if you like Livly and wish to support futher development, or support feeding my stomach, you can make a donation using the links below:
 
-[Venmo @maverick-cook](https://venmo.com/Maverick-Cook?txn=pay&note=Supporting%20LivLy)
+[Venmo @maverick-cook](https://venmo.com/Maverick-Cook?txn=pay&note=Supporting%20Livly)
 [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9G7XP36AHAQ7Q&lc=US&item_name=Maverick%20Cook%20Developer%20Fund&item_number=mcdf2017&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
